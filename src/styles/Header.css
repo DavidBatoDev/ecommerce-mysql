@@ -1,0 +1,89 @@
+.header {
+    height: 70px;
+    background-color: #131921;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid #cd9042;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.header--logo {
+    cursor: pointer;
+    width: 100px;
+    object-fit: contain;
+    margin: 0 20px;
+    margin-top: 18px;
+}
+
+.header--search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    border-radius: 24px;
+    background-color: #1f2937;
+    padding: 10px;
+}
+
+.header--searchInput {
+    height: 12px;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.header--searchIcon {
+    padding: 5px;
+    height: 22px !important;
+    background-color: #cd9042;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.header--nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.header--options {
+    cursor: pointer;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header--optionsLineOne {
+    font-size: 10px;
+}
+
+.header--optionsLineTwo {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.header--basketCount {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #f08804;
+    font-weight: 700;
+}
+
+.header--optionBasket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.header--basketIcon {
+    color: white;
+    font-size: 30px;
+}
