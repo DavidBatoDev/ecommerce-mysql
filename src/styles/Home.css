@@ -8,31 +8,6 @@
     height: 100vh;
 }
 
-.home--category {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    background-color: #1f2937;
-}
-
-.home--category > span {
-    color: white;
-    font-size: 15px; /* Adjust as needed */
-    font-weight: 600; /* Adjust as needed */
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-    border-bottom: 3px solid transparent; /* Add a transparent border initially */
-}
-
-.home--category > span:hover {
-    background-color: #4a5568; /* Change the background color on hover */
-    border-bottom: 3px solid #ffffff; /* Add a border on hover */
-}
-
-
 .home--container {
     max-width: 1500px;
 }

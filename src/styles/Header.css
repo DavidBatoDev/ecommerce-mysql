@@ -1,4 +1,4 @@
-.header {
+.header--container {
     height: 70px;
     background-color: #131921;
     display: flex;
@@ -86,4 +86,49 @@
 .header--basketIcon {
     color: white;
     font-size: 30px;
+}
+
+.home--category {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: #1f2937;
+}
+
+.category--button {
+    color: white;
+    font-size: 15px; /* Adjust as needed */
+    font-weight: 600; /* Adjust as needed */
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    border-bottom: 3px solid transparent; /* Add a transparent border initially */
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the color from the parent element */
+}
+
+.category--button:hover {
+    background-color: #4a5568;
+    border-bottom: 3px solid #ffffff;
+}
+
+.category--button:active {
+    background-color: #4a5568;
+    border-bottom: 3px solid #ffffff;
+}
+}
+
+.home--category > span:hover {
+    background-color: #4a5568; /* Change the background color on hover */
+    border-bottom: 3px solid #ffffff; /* Add a border on hover */
+}
+
+.home--category > span.active {
+    background-color: #4a5568; /* Apply a different background color to the active category */
+    border-bottom: 3px solid #ffffff; /* Apply a border to the active category */
 }

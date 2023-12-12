@@ -1,13 +1,23 @@
 import Header from "./components/Header"
-import Main from "./components/Home"
+import Home from "./components/Home"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom'
 
 
 function App() {
 
   return (
     <>
+    <Router>
       <Header />
-      <Main />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/:category' element={<Home />} />
+      </Routes>
+    </Router>
     </>
   )
 }
