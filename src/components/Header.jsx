@@ -11,14 +11,16 @@ function Header() {
         <div className='header--container'>
             <img className='header--logo' src={Logo} alt="logo" />
             <div className="header--search">
-                <input className='header--searchInput' type="text" placeholder='search' />
+                <input className='header--searchInput' type="text" placeholder='Search' />
                 <SearchIcon className='header--searchIcon' />
             </div>
             <div className="header--nav">
-                <div className="header--options">
-                    <span className='header--optionsLineOne'>Hello Guest</span>
-                    <span className='header--optionsLineTwo'>Sign In</span>
-                </div>
+                <Link to='/sign-in'>
+                    <div className="header--options">
+                        <span className='header--optionsLineOne'>Hello Guest</span>
+                        <span className='header--optionsLineTwo'>Sign In</span>
+                    </div>
+                </Link>
                 <div className="header--options">
                     <span className='header--optionsLineOne'>Returns</span>
                     <span className='header--optionsLineTwo'>& Orders</span>

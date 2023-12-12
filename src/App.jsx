@@ -1,5 +1,6 @@
 import Header from "./components/Header"
 import Home from "./components/Home"
+import SignIn from "./components/SignIn"
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,10 +13,10 @@ function App() {
   return (
     <>
     <Router>
-      <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/:category' element={<Home />} />
+        <Route path='/' element={<><Header /><Home /></>} />
+        <Route path='/:category' element={<><Header /><Home /></>} />
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
     </Router>
     </>

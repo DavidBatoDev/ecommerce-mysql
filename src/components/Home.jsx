@@ -15,9 +15,6 @@ function Home() {
         'jewelery': 'jewelery',
         'electronics': 'electronics',
     };
-    
-    
-    console.log(products.map((product) => product.category));
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -38,6 +35,8 @@ function Home() {
         };
         fetchProducts();
     }, [category]);
+
+    console.log(products)
 
     function renderItems(array, start, end, callback) {
         const items = [];
