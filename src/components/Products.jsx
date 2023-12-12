@@ -1,53 +1,35 @@
-import React, {useState} from 'react'
-import CheckIcon from '@mui/icons-material/Check';
+import React from 'react'
 import '../styles/Products.css'
+import Star_1 from '../assets/ratings/rating-10.png'
+import Star_2 from '../assets/ratings/rating-20.png'
+import Star_3 from '../assets/ratings/rating-30.png'
+import Star_4 from '../assets/ratings/rating-40.png'
+import Star_5 from '../assets/ratings/rating-50.png'
 
-function Products({id, title, price, description, category, image}) {
-    const [quantity, setQuantity] = useState(1)
-    return (
-        <div className='product'>
-            <div className="product-container">
-                    <div className="product-image-container">
-                        <img className="product-image"
-                            src={image} alt={title} />
-                    </div>
+export default function Product({id, title, image, price, rating}) {
+    const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
 
-                    <div className="product-name limit-text-to-2-lines">
-                        {title}
-                    </div>
-
-                    <div className="product-price">
-                        ${price}
-                    </div>
-
-                    <div className="product-quantity-container">
-                        <select value={quantity} onChange={e => setQuantity(e.target.value)}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-
-                    <div className="product-spacer"></div>
-
-                    <div className="added-to-cart">
-                        <CheckIcon className="added-to-cart-icon" />
-                        Added
-                    </div>
-
-                    <button className="add-to-cart-button button-primary">
-                        Add to Cart
-                    </button>
-                </div>
+  return (
+    <div className='product'>
+        <div className="product--info">
+            <p>{title}</p>
+            <p className="product--price">
+            <small>$</small>
+            <strong>{price}</strong>
+            </p>
         </div>
-    )
-}
 
-export default Products
+        <div className="product--rating">
+            {/* <img src={stars[Math.floor(rating) - 1]} alt="" /> */}
+        </div>
+
+        <img 
+            className='product--image'
+            src={image}
+            alt=""
+        />
+
+        <button className='product--button'>Add to Basket</button>
+    </div>
+  )
+}

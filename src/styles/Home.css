@@ -1,4 +1,5 @@
 .home {
+    position: static;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,9 +8,49 @@
     height: 100vh;
 }
 
-.home--image {
+.home--category {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
     width: 100%;
-    z-index: 1;
+    background-color: #1f2937;
+}
+
+.home--category > span {
+    color: white;
+    font-size: 15px; /* Adjust as needed */
+    font-weight: 600; /* Adjust as needed */
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    border-bottom: 3px solid transparent; /* Add a transparent border initially */
+}
+
+.home--category > span:hover {
+    background-color: #4a5568; /* Change the background color on hover */
+    border-bottom: 3px solid #ffffff; /* Add a border on hover */
+}
+
+
+.home--container {
+    max-width: 1500px;
+}
+
+/* .home--container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  } */
+
+.home--image {
+    position: relative;
+    width: 100%;
+    z-index: -1;
     margin-bottom: -150px;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
@@ -22,3 +63,10 @@
     margin-left: 5px;
     margin-right: 5px;
 }
+
+.home--rest {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
