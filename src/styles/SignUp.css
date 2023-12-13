@@ -1,0 +1,90 @@
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #ded3d3;
+
+}
+
+.signup-logo {
+    width: 150px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.signup-logo:hover {
+    transform: scale(1.05);
+}
+
+.signup--container {
+    width: 400px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.signup--container > h1 {
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.signup--container > form > label > h5 {
+    margin-bottom: 5px;
+}
+
+.signup--container > form > label > input {
+    width: 98%;
+    height: 50px;
+    border-radius: 20px;
+    padding: 0 10px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    background-color: white;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.signup--container > form > label > input:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.signup--container > p {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.signup--signUpButton {
+    color: rgb(200, 150, 48);
+    background-color: #131921;
+    border-radius: 20px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid;
+    margin-top: 20px;
+    border-color: #a88734 #cb9714 #a27c1c;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.signIn-notice {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #333; /* Adjust color as needed */
+}
+
+.signIn-navigate {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+}
+
+.signIn-navigate:hover {
+    color: #0056b3;
+}
+
+
+

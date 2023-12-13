@@ -1,18 +1,17 @@
 import React, {useState} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import LogoDark from '../assets/Logo/Logo-dark.png'
-import '../styles/Signin.css'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import '../styles/SignUp.css'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../Firebase'
 
-function Signin() {
-    const navigate = useNavigate();
+function SignUp() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const signIn = e => {
+    const signUp = e => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user)
@@ -26,12 +25,13 @@ function Signin() {
     }
 
     return (
-        <div className='signin'>
+    <div>
+        <div className='signup'>
             <Link to='/'>
-                <img className='signin-logo' src={LogoDark} alt="" />
+                <img className='signup-logo' src={LogoDark} alt="" />
             </Link>
-            <div className='signin--container'>
-                <h1>Sign in</h1>
+            <div className='signup--container'>
+                <h1>Sign Up</h1>
                 <form action="">
                     <label htmlFor="">
                         <h5>Email</h5>
@@ -42,21 +42,16 @@ function Signin() {
                         <h5>Password</h5>
                         <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
                     </label>
-                    <button onClick={signIn} className='signin--signInButton'>Sign In</button>
+                    <button onClick={signUp} className='signup--signUpButton'>Sign Up</button>
                 </form>
-
-                <p>
-                    By signing-in you agree to Demo Ecommerce App's
-                    Conditions of Use & Sale, Please see our Privacy Notice, 
-                    our Cookies Notice and our interest-Based Ads Notice
-                </p>
-
-                <Link to="/sign-up">
-                    <button className='signin--registerButton'>Create Account</button>
-                </Link> 
+                <span className='signIn-notice'>Already have an account?</span>
+                <Link to='/sign-in'>
+                    <p className='signIn-navigate'>Sign In?</p>
+                </Link>
             </div>
         </div>
-    )
+    </div>
+  )
 }
 
-export default Signin
+export default SignUp
