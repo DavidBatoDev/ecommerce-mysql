@@ -1,18 +1,33 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../styles/Products.css'
 import Star_1 from '../assets/ratings/rating-10.png'
 import Star_2 from '../assets/ratings/rating-20.png'
 import Star_3 from '../assets/ratings/rating-30.png'
 import Star_4 from '../assets/ratings/rating-40.png'
 import Star_5 from '../assets/ratings/rating-50.png'
+import { useStateValue } from '../context/StateProvider'
 
 export default function Product({id, title, image, price, rating}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
+    const [{basket}, dispatch] = useStateValue();
+
+    const [quantity, setQuantity] = useState(1);
+
+    const handleIncrement = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+    };
+
 
   return (
     <div className='product'>
         <div className="product--info">
-            <p>{title}</p>
+            <p className='product--title'>{title}</p>
             <p className="product--price">
             <small>$</small>
             <strong>{price}</strong>
@@ -28,6 +43,13 @@ export default function Product({id, title, image, price, rating}) {
             src={image}
             alt=""
         />
+        
+            
+        <div className="quantity-selector">
+            <button onClick={handleDecrement} className="decrement">-</button>
+            <p className='q'>{quantity}</p>
+            <button onClick={handleIncrement} className="increment">+</button>
+        </div>
 
         <button className='product--button'>Add to Basket</button>
     </div>

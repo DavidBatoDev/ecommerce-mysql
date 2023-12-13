@@ -3,11 +3,15 @@ import Logo from '../assets/Logo/logo.png'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import '../styles/Header.css'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {auth} from '../Firebase'
 import {signOut} from 'firebase/auth'
+import { useStateValue } from '../context/StateProvider';
 
 function Header() {
+    const [{ user }, dispatch] = useStateValue();
+    const category = useParams()
+
 
     const handleAuthentication = () => {
         if (auth.currentUser) {
@@ -27,13 +31,13 @@ function Header() {
         <div className='header--container'>
             <img className='header--logo' src={Logo} alt="logo" />
             <div className="header--search">
-                <input className='header--searchInput' type="text" placeholder='Search' />
+                <input className='header--searchInput' type="text" placeholder={category.category ? `Search item in ${category.category}` : "Search"} />
                 <SearchIcon className='header--searchIcon' />
             </div>
             <div className="header--nav">
-                {auth.currentUser ? (
+                {user ? (
                     <div onClick={handleAuthentication} className="header--options">
-                        <span className='header--optionsLineOne'>Hello {auth.currentUser.email.split("@")[0]}</span>
+                        <span className='header--optionsLineOne'>Hello {user.email.split("@")[0]}</span>
                         <span className='header--optionsLineTwo'>Sign Out</span>
                     </div>
                 ) : (

@@ -29,6 +29,11 @@
     text-align: left;
 }
 
+.product--title {
+    font-size: 14px;
+    overflow-y: hidden;
+}
+
 .product--price {
     margin-top: 5px;
 }
@@ -46,11 +51,14 @@
 
 .product--button {
     cursor: pointer;
-    background-color: #f0c14b;
+    background-color: #1f2937;
+    color: #cd9042;
+    width: 100px;
+    height: 30px;
+    border-radius: 40px;
     border: 1px solid;
     margin-top: 10px;
     border-color: #a88734 #9c7e31 #846a29;
-    color: #111;
 }
 
 .product--button:hover {
@@ -61,3 +69,24 @@
     background-color: #9c7e31;
 }
 
+.quantity-selector {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.quantity-selector .decrement,
+.quantity-selector .increment {
+    background-color: #1f2937;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.quantity-selector > p {
+    margin: 0;
+    font-size: 20px;
+}

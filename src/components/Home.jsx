@@ -36,8 +36,6 @@ function Home() {
         fetchProducts();
     }, [category]);
 
-    console.log(products)
-
     function renderItems(array, start, end, callback) {
         const items = [];
         for (let i = start; i < end; i++) {
