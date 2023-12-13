@@ -11,6 +11,8 @@ export default function Product({id, title, image, price, rating}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
     const [{basket}, dispatch] = useStateValue();
 
+
+    // quantity state & functions
     const [quantity, setQuantity] = useState(1);
 
     const handleIncrement = () => {
@@ -22,6 +24,20 @@ export default function Product({id, title, image, price, rating}) {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
     };
+
+    const addToBasket = () => {
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            item: {
+                id,
+                title,
+                image,
+                price,
+                rating,
+                quantity
+            }
+        })
+    }
 
 
   return (
@@ -51,7 +67,7 @@ export default function Product({id, title, image, price, rating}) {
             <button onClick={handleIncrement} className="increment">+</button>
         </div>
 
-        <button className='product--button'>Add to Basket</button>
+        <button onClick={addToBasket} className='product--button'>Add to Basket</button>
     </div>
   )
 }

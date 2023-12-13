@@ -3,6 +3,7 @@ import Header from "./components/Header"
 import Home from "./components/Home"
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
+import Basket from "./components/Basket"
 import {
   BrowserRouter as Router,
   Routes,
@@ -39,6 +40,7 @@ function App() {
         <Route path='/:category' element={<><Header /><Home /></>} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/basket" element={<><Header /><Basket /></>} />
       </Routes>
     </Router>
     </>

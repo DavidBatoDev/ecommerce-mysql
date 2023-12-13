@@ -52,10 +52,12 @@ function Header() {
                     <span className='header--optionsLineOne'>Returns</span>
                     <span className='header--optionsLineTwo'>& Orders</span>
                 </div>
+                <Link to='/basket'>
                 <div className="header--optionsBasket">
                     <ShoppingBasketIcon />
                     <span className='header--optionsLineTwo header--basketCount'>0</span>
                 </div>
+                </Link>
             </div>
         </div>
         <div className='home--category'>

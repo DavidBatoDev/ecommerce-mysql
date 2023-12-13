@@ -1,0 +1,67 @@
+.basket {
+ height: 100vh;
+}
+
+.basket > h1 {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.basket-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  column-gap: 25px;
+
+}
+
+.payment {
+  background-color: white;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid rgb(222, 222, 222);
+}
+
+.payment-summary-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .payment-summary-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  
+    font-size: 15px;
+    margin-bottom: 9px;
+  }
+  
+  .payment-summary-money {
+    text-align: right;
+  }
+  
+  .subtotal-row .payment-summary-money {
+    border-top: 1px solid rgb(222, 222, 222);
+  }
+  
+  .subtotal-row div {
+    padding-top: 9px;
+  }
+  
+  .total-row {
+    color: rgb(177, 39, 4);
+    font-weight: 700;
+    font-size: 18px;
+  
+    border-top: 1px solid rgb(222, 222, 222);
+    padding-top: 18px;
+  }
+  
+  .place-order-button {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 8px;
+  
+    margin-top: 11px;
+    margin-bottom: 15px;
+  }
