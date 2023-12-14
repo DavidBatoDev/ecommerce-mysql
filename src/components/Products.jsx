@@ -6,6 +6,7 @@ import Star_3 from '../assets/ratings/rating-30.png'
 import Star_4 from '../assets/ratings/rating-40.png'
 import Star_5 from '../assets/ratings/rating-50.png'
 import { useStateValue } from '../context/StateProvider'
+import formatCurrency from '../utils/FormatCurrency';
 
 export default function Product({id, title, image, price, rating}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
@@ -58,7 +59,7 @@ export default function Product({id, title, image, price, rating}) {
             <p className='product--title'>{title}</p>
             <p className="product--price">
             <small>$</small>
-            <strong>{price}</strong>
+            <strong>{formatCurrency(price)}</strong>
             </p>
         </div>
 

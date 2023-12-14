@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStateValue } from '../context/StateProvider'
 import '../styles/BasketItem.css'
+import formatCurrency from '../utils/FormatCurrency';
 
 function BasketItem({id, title, image, price, rating, quantity}) {
   const [{basket}, dispatch] = useStateValue();
@@ -23,7 +24,7 @@ function BasketItem({id, title, image, price, rating, quantity}) {
                     {title}
                 </div>
                 <div class="product-price">
-                  {price}
+                  ${formatCurrency(price)}
                 </div>
                 <div class="product-quantity">
                   <span className='amount-quantity'>

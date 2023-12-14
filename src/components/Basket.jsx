@@ -2,9 +2,21 @@ import React from 'react'
 import { useStateValue } from '../context/StateProvider'
 import BasketItem from './BasketItem'
 import '../styles/Basket.css'
+import formatCurrency from '../utils/FormatCurrency';
 
 function Basket() {
     const [{basket}, dispatch] = useStateValue();
+
+    const calculateItemsPrice = () => {
+        let price = 0;
+        basket.map(item => {
+            price += item.price * item.quantity;
+        })
+        return price;
+    }
+
+    const itemsPrice = calculateItemsPrice();
+
 
     return (
         <div className='basket'>
@@ -29,8 +41,8 @@ function Basket() {
                         </div>
 
                         <div class="payment-summary-row">
-                            <div>Items (3):</div>
-                            <div class="payment-summary-money">$42.75</div>
+                            <div>Items ({basket.length}):</div>
+                            <div class="payment-summary-money">${formatCurrency(itemsPrice)}</div>
                         </div>
 
                         <div class="payment-summary-row">
