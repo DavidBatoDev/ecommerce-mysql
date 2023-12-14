@@ -1,9 +1,7 @@
 .basket-item {
-  background-color: white;
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-left: 30px;
 }
 
 .basket-item-details-grid {

@@ -1,7 +1,17 @@
 import React from 'react'
+import { useStateValue } from '../context/StateProvider'
 import '../styles/BasketItem.css'
 
 function BasketItem({id, title, image, price, rating, quantity}) {
+  const [{basket}, dispatch] = useStateValue();
+
+  const removeFromBasket = () => {
+    dispatch({
+      type: 'REMOVE_FROM_BASKET',
+      id: id
+    })
+  }
+
   return (
     <div className='basket-item'>
             <div class="basket-item-details-grid">
@@ -22,7 +32,7 @@ function BasketItem({id, title, image, price, rating, quantity}) {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span onClick={removeFromBasket} class="delete-quantity-link link-primary">
                     Delete
                   </span>
                 </div>

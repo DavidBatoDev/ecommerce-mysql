@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from '../assets/Logo/logo.png'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
@@ -9,9 +9,10 @@ import {signOut} from 'firebase/auth'
 import { useStateValue } from '../context/StateProvider';
 
 function Header() {
-    const [{ user }, dispatch] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
     const category = useParams()
-
+    
+    const basketQuantity = basket.map(item => item.quantity).reduce((a, b) => a + b, 0)
 
     const handleAuthentication = () => {
         if (auth.currentUser) {
@@ -55,7 +56,7 @@ function Header() {
                 <Link to='/basket'>
                 <div className="header--optionsBasket">
                     <ShoppingBasketIcon />
-                    <span className='header--optionsLineTwo header--basketCount'>0</span>
+                    <span className='header--optionsLineTwo header--basketCount'>{basketQuantity}</span>
                 </div>
                 </Link>
             </div>
