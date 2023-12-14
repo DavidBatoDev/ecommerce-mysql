@@ -19,6 +19,12 @@
   padding: 10px;
   border-radius: 20px;
   border: 1px solid rgb(222, 222, 222);
+  position: relative;
+}
+
+.payment-summary {
+  position: sticky;
+  top: 20px;
 }
 
 .payment-summary-title {

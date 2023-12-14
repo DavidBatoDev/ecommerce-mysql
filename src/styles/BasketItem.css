@@ -3,6 +3,7 @@
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-left: 30px;
 }
 
 .basket-item-details-grid {
@@ -45,6 +46,33 @@
     margin-left: 3px;
   }
 
+  .amount-quantity {
+    font-weight: 700;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+
+  .quantity-label {
+    font-weight: 700;
+    color: #553d1e;
+  }
+
+  .update-quantity-link {
+    color: rgb(0, 118, 0);
+    font-size: 15px;
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
+  .delete-quantity-link {
+    color: rgb(177, 39, 4);
+    font-size: 15px;
+    margin-left: 3px;
+    cursor: pointer;
+  }
+
   @media (max-width: 1000px) {
     .delivery-options {
       grid-column: 1 / span 2;
@@ -61,21 +89,27 @@
     grid-template-columns: 24px 1fr;
     margin-bottom: 12px;
     cursor: pointer;
+    column-gap: 10px;
+    align-items: center;
   }
   
   .delivery-option-input {
     margin-left: 0px;
     cursor: pointer;
+    height: 20px;
+    width: 20px;
   }
   
   .delivery-option-date {
     color: rgb(0, 118, 0);
     font-weight: 500;
     margin-bottom: 3px;
+    font-size: 0.8em;
   }
   
   .delivery-option-price {
     color: rgb(120, 120, 120);
     font-size: 15px;
+    font-size: 0.8em;
   }
 

@@ -26,17 +26,29 @@ export default function Product({id, title, image, price, rating}) {
     };
 
     const addToBasket = () => {
-        dispatch({
-            type: 'ADD_TO_BASKET',
-            item: {
-                id,
-                title,
-                image,
-                price,
-                rating,
-                quantity
-            }
-        })
+        const productId = id;
+
+        const existingProduct = basket.findIndex(product => product.id === productId);
+
+        if (existingProduct !== -1) {
+            basket[existingProduct].quantity += 1;
+            dispatch({
+                type: 'ADD_TO_BASKET',
+                item: {...item, quantity: basket[existingProduct].quantity}
+            })
+        } else {
+            dispatch({
+                type: 'ADD_TO_BASKET',
+                item: {
+                    id,
+                    title,
+                    image,
+                    price,
+                    rating,
+                    quantity: 1
+                }
+            })
+        }
     }
 
 
@@ -61,11 +73,11 @@ export default function Product({id, title, image, price, rating}) {
         />
         
             
-        <div className="quantity-selector">
+        {/* <div className="quantity-selector">
             <button onClick={handleDecrement} className="decrement">-</button>
             <p className='q'>{quantity}</p>
             <button onClick={handleIncrement} className="increment">+</button>
-        </div>
+        </div> */}
 
         <button onClick={addToBasket} className='product--button'>Add to Basket</button>
     </div>
