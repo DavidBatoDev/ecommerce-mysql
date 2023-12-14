@@ -6,7 +6,6 @@ import formatCurrency from '../utils/FormatCurrency';
 
 function Basket() {
     const [{basket}, dispatch] = useStateValue();
-      console.log(basket.map(item => [item.id, item.isSelected]))
 
       const calculateItemsTotal = () => {
         return basket

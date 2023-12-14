@@ -33,10 +33,13 @@ export default function Product({id, title, image, price, rating}) {
         const existingProduct = basket.findIndex(product => product.id === productId);
 
         if (existingProduct !== -1) {
-            basket[existingProduct].quantity += 1;
+            const newQuamtity = basket[existingProduct].quantity += 1;
             dispatch({
-                type: 'ADD_TO_BASKET',
-                item: {...item, quantity: basket[existingProduct].quantity}
+                type: 'SET_QUANTITY',
+                payload: {
+                    id,
+                    quantity: newQuamtity
+                }
             })
         } else {
             dispatch({
