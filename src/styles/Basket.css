@@ -2,6 +2,18 @@
  background-color: #ded3d3;
 }
 
+.basket-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.basket-select > input {
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+}
+
 .basket > h1 {
   font-size: 25px;
   margin-bottom: 20px;
@@ -9,20 +21,23 @@
 
 .basket-container {
   display: grid;
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: 2fr 1fr;
   column-gap: 25px;
   border-radius: 30px;
 }
 
 .basket-item-container {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 5px;
-  margin-left: 30px;
+  margin-left: 10px;
   padding: 30px;
+  height: 100%;
 }
 
 .payment {
-  padding: 10px;
+  margin-left: 10px;
   border-radius: 20px;
   position: relative;
   margin-right: 10px;
@@ -80,4 +95,36 @@
   
     margin-top: 11px;
     margin-bottom: 15px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .basket-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 0px;
+    }
+  
+    .basket-item-container {
+      margin-left: 0;
+      margin-bottom: 20px;
+    }
+  
+    .payment {
+      margin-right: 0;
+    }
+
+    span {
+      font-size: 9px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    div {
+      font-size: 9px;
+    }
   }

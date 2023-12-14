@@ -17,6 +17,13 @@ export const reducer = (state, action) => {
                 basket: [...state.basket, action.item],
             }
         }
+        case 'TOGGLE_ITEM_SELECTION': {
+            return {
+                ...state,
+                basket: state.basket.map(item => item.id === action.id 
+                ? {...item, isSelected: !item.isSelected} : item),
+            }
+        }
         case 'REMOVE_FROM_BASKET': {
             return {
                 ...state,

@@ -1,18 +1,26 @@
 .basket-item {
   padding: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 30px 1fr;
+  border-bottom: 1px solid rgb(222, 222, 222);
 }
 
 .basket-item-details-grid {
     display: grid;
-    grid-template-columns: 100px 1fr 1fr;
+    grid-template-columns: 100px 1fr;
     column-gap: 25px;
   }
+
+.basket-item-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
   
   @media (max-width: 1000px) {
     .basket-item-details-grid {
-      grid-template-columns: 100px 1fr;
+      grid-template-columns: 90px 1fr;
       row-gap: 30px;
     }
   }
@@ -20,11 +28,6 @@
   .product-image {
     max-width: 100%;
     max-height: 120px;
-  
-    /* margin-left: auto;
-       margin-right auto;
-       Is a trick for centering an element horizontally
-       without needing a container. */
     margin-left: auto;
     margin-right: auto;
   }
@@ -109,5 +112,41 @@
     color: rgb(120, 120, 120);
     font-size: 15px;
     font-size: 0.8em;
+  }
+
+  @media screen and (max-width: 768px) {
+    .basket-container {
+      grid-template-columns: 1fr 1fr;
+      gap: 0px;
+    }
+  
+    .basket-item-container {
+      margin-left: 0;
+      margin-bottom: 20px;
+    }
+  
+    .payment {
+      margin-right: 0;
+    }
+
+    span {
+      font-size: 9px;
+    }
+
+    p {
+      font-size: 12px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    div {
+      font-size: 9px;
+    }
+
+    span {
+      font-size: 9px;
+    }
   }
 

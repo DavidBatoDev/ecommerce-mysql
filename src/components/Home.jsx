@@ -50,57 +50,53 @@ function Home() {
   return (
     <div className='home'>
         <div className='home--container'>
-            <img 
-            className='home--image'
-            src={DecemberBanner} 
-            alt="banner" />
+            <img className='home--image' src={DecemberBanner} alt="banner" />
             <div className='home--row'>
                 {renderItems(products, 0, 2, (product) => (
                     <Products
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    rating={product.rating.rate}
-                    />   
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        rating={product.rating.rate}
+                    />
                 ))}
-
             </div>
             <div className='home--row'>
                 {renderItems(products, 2, 5, (product) => (
                     <Products
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    rating={product.rating.rate}
-                    />   
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        rating={product.rating.rate}
+                    />
                 ))}
             </div>
             <div className='home--row'>
                 {renderItems(products, 5, 6, (product) => (
                     <Products
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    rating={product.rating.rate}
-                    />   
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        rating={product.rating.rate}
+                    />
                 ))}
             </div>
             <div className='home--rest'>
                 {renderItems(products, 6, products.length, (product) => (
                     <Products
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    rating={product.rating.rate}
-                    />   
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        rating={product.rating.rate}
+                    />
                 ))}
             </div>
         </div>

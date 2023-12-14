@@ -6,67 +6,68 @@ import formatCurrency from '../utils/FormatCurrency';
 
 function Basket() {
     const [{basket}, dispatch] = useStateValue();
+      console.log(basket.map(item => [item.id, item.isSelected]))
 
-    const calculateItemsPrice = () => {
-        let price = 0;
-        basket.map(item => {
-            price += item.price * item.quantity;
-        })
-        return price;
-    }
+      const calculateItemsTotal = () => {
+        return basket
+          .filter(item => item.isSelected)
+          .map(item => item.price * item.quantity)
+          .reduce((acc, item) => acc + item, 0)
+      }
 
-    const itemsPrice = calculateItemsPrice();
-
+      const calculateTotal = () => {
+        return calculateItemsTotal() * 1.10
+      }
 
     return (
         <div className='basket'>
             <h1>Review your order</h1>
             <div className="basket-container">
-                <div class="basket-item-container">
-                    {basket.map(item => (
-                        <BasketItem 
-                            id={item.id}
-                            title={item.title}
-                            image={item.image}
-                            price={item.price}
-                            rating={item.rating}
-                            quantity={item.quantity}
-                        />
-                    ))}
+                <div className="basket-item-container">
+                {basket.map(item => (
+                    <BasketItem
+                        key={item.id}
+                        id={item.id}
+                        title={item.title}
+                        image={item.image}
+                        price={item.price}
+                        quantity={item.quantity}
+                        isSelected={item.isSelected}
+                    />
+                ))}
                 </div>
                 <div className='payment'>
-                    <div class="payment-summary">
-                        <div class="payment-summary-title">
-                            Order Summary
+                    <div className="payment-summary">
+                        <div className="payment-summary-title">
+                            Basket Summary
                         </div>
 
-                        <div class="payment-summary-row">
+                        <div className="payment-summary-row">
                             <div>Items ({basket.length}):</div>
-                            <div class="payment-summary-money">${formatCurrency(itemsPrice)}</div>
+                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
                         </div>
-
-                        <div class="payment-summary-row">
+                        <div className="payment-summary-row">
                             <div>Shipping &amp; handling:</div>
-                            <div class="payment-summary-money">$4.99</div>
+                            <div className="payment-summary-money">Free</div>
                         </div>
 
-                        <div class="payment-summary-row subtotal-row">
+                        <div className="payment-summary-row subtotal-row">
                             <div>Total before tax:</div>
-                            <div class="payment-summary-money">$47.74</div>
+                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
                         </div>
 
-                        <div class="payment-summary-row">
+                        <div className="payment-summary-row">
                             <div>Estimated tax (10%):</div>
-                            <div class="payment-summary-money">$4.77</div>
+                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal() * 0.10)}</div>
                         </div>
 
-                        <div class="payment-summary-row total-row">
+                        <div className="payment-summary-row total-row">
                             <div>Order total:</div>
-                            <div class="payment-summary-money">$52.51</div>
+                            <div className="payment-summary-money">${formatCurrency(calculateTotal())}</div>
                         </div>
 
-                        <button class="place-order-button button-primary">
-                            Place your order
+                        <button className="place-order-button button-primary">
+                            Proceed to Checkout
                         </button>
                     </div>
                 </div>

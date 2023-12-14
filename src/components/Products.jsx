@@ -26,6 +26,7 @@ export default function Product({id, title, image, price, rating}) {
         }
     };
 
+
     const addToBasket = () => {
         const productId = id;
 
@@ -45,8 +46,8 @@ export default function Product({id, title, image, price, rating}) {
                     title,
                     image,
                     price,
-                    rating,
-                    quantity: 1
+                    quantity: 1,
+                    isSelected: true
                 }
             })
         }
