@@ -3,6 +3,7 @@ import Products from './Products';
 import DecemberBanner from '../assets/images/DecemberBanner.png'
 import '../styles/Home.css'
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Home() {
     const [products, setProducts] = useState([])
@@ -49,6 +50,24 @@ function Home() {
 
   return (
     <div className='home'>
+    <div className='home--category'>
+        <Link to='/'>
+            <span className='category--button'>All</span>
+        </Link>
+        <Link to='/mens-clothing'>
+            <span className='category--button'>Mens Clothing</span>
+        </Link>
+        <Link to='/womens-clothing'>
+            <span className='category--button'>Womens Clothing</span>
+        </Link>
+        <Link to='/jewelery'>
+            <span className='category--button'>Jewelery</span>
+        </Link>
+        <Link to='/electronics'>
+            <span className='category--button'>Electronics</span>
+        </Link>
+    </div>
+    <div className='home--class'>
         <div className='home--container'>
             <img className='home--image' src={DecemberBanner} alt="banner" />
             <div className='home--row'>
@@ -101,6 +120,7 @@ function Home() {
             </div>
         </div>
     </div>
+  </div>
   )
 }
 

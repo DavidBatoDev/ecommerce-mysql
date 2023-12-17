@@ -119,6 +119,14 @@
       grid-template-columns: 1fr 1fr;
       gap: 0px;
     }
+
+    .update-quantity-link {
+      font-size: 11px;
+    }
+
+    .delete-quantity-link {
+      font-size: 11px;
+    }
   
     .basket-item-container {
       margin-left: 0;

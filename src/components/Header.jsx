@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LogoDark from '../assets/Logo/Logo-dark.png'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
@@ -11,8 +11,6 @@ import { useStateValue } from '../context/StateProvider';
 function Header() {
     const [{ basket, user }, dispatch] = useStateValue();
     const category = useParams()
-    
-    // const basketQuantity = basket.map(item => item.quantity).reduce((a, b) => a + b, 0)
 
     const handleAuthentication = () => {
         if (auth.currentUser) {
@@ -31,8 +29,8 @@ function Header() {
     console.log(basket.map(item => item.quantity))
 
   return (
-    <div className="header">
-        <div className='header--container'>
+    <div className='header'>
+        <div className='header--container' >
             <Link to="/">
                 <img className='header--logo' src={LogoDark} alt="logo" />
             </Link>
@@ -66,25 +64,6 @@ function Header() {
                 </Link>
             </div>
         </div>
-        {window.location.pathname !== '/basket' &&
-        <div className='home--category'>
-            <Link to='/'>
-                <span className='category--button'>All</span>
-            </Link>
-            <Link to='/mens-clothing'>
-                <span className='category--button'>Mens Clothing</span>
-            </Link>
-            <Link to='/womens-clothing'>
-                <span className='category--button'>Womens Clothing</span>
-            </Link>
-            <Link to='/jewelery'>
-                <span className='category--button'>Jewelery</span>
-            </Link>
-            <Link to='/electronics'>
-                <span className='category--button'>Electronics</span>
-            </Link>
-        </div>
-        }   
     </div>
   )
 }
