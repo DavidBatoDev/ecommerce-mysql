@@ -76,7 +76,7 @@ function Basket() {
                             <div className="payment-summary-money">${formatCurrency(calculateTotal())}</div>
                         </div>
 
-                        <button onClick={e => navigate("./")} className="place-order-button button-primary">
+                        <button onClick={e => navigate("/payment")} className="place-order-button button-primary">
                             Proceed to Checkout
                         </button>
                     </div>

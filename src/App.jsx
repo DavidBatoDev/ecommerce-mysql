@@ -12,6 +12,7 @@ import {
 import { auth } from "./Firebase"
 import { onAuthStateChanged } from "firebase/auth"
 import { useStateValue } from "./context/StateProvider"
+import Payment from "./components/Payment"
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
@@ -41,6 +42,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/basket" element={<><Header /><Basket /></>} />
+        <Route path="/payment" element={<><Header/><Payment /></>} />
       </Routes>
     </Router>
     </>

@@ -1,0 +1,43 @@
+.payment--items {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.item {
+    padding: 10px;
+    display: flex;
+    background-color: white;
+    align-items: center;
+    overflow: hidden;
+    height: 90px;
+}
+
+.item--image > img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.item--info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.item--title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.item--price {
+    font-size: 1rem;
+    color: #333;
+}
+
+.small-text {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 5px;
+}
