@@ -4,9 +4,10 @@ import BasketItem from './BasketItem'
 import '../styles/Basket.css'
 import formatCurrency from '../utils/FormatCurrency';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Basket() {
+    const navigate = useNavigate();
     const [{basket}, dispatch] = useStateValue();
 
       const calculateItemsTotal = () => {
@@ -19,8 +20,6 @@ function Basket() {
       const calculateTotal = () => {
         return calculateItemsTotal() * 1.10
       }
-
-
 
     return (
         <div className='basket'>
@@ -77,7 +76,7 @@ function Basket() {
                             <div className="payment-summary-money">${formatCurrency(calculateTotal())}</div>
                         </div>
 
-                        <button className="place-order-button button-primary">
+                        <button onClick={e => navigate("./")} className="place-order-button button-primary">
                             Proceed to Checkout
                         </button>
                     </div>
