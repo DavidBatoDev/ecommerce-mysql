@@ -1,13 +1,21 @@
+:root {
+    --primary-bg-color: #f5f5f5;    /* Light gray background */
+    --accent-color: #ffaa80;        /* Light orange accent color */
+    --text-color: #333333;          /* Dark gray text color */
+    --search-bg-color: #e0e0e0;     /* Light gray search background */
+  }
+
+/* Header Styles */
 .header--container {
     height: 70px;
-    background-color: #131921;
+    background-color: var(--primary-bg-color);
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 2px solid #cd9042;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-bottom: 2px solid var(--accent-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .header--logo {
@@ -23,7 +31,7 @@
     flex: 1;
     align-items: center;
     border-radius: 24px;
-    background-color: #1f2937;
+    background-color: var(--search-bg-color);
     padding: 10px;
 }
 
@@ -33,14 +41,15 @@
     border: none;
     width: 100%;
     background-color: transparent;
-    color: white;
+    color: var(--text-color);
     font-size: 14px;
+    font-family: var(--main-font);
 }
 
 .header--searchIcon {
     padding: 5px;
     height: 22px !important;
-    background-color: #cd9042;
+    background-color: var(--accent-color);
     border-radius: 50%;
     margin-left: 10px;
 }
@@ -52,7 +61,7 @@
 
 .header--options {
     cursor: pointer;
-    color: white;
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
     margin-left: 10px;
@@ -72,7 +81,7 @@
     cursor: pointer;
     margin-left: 10px;
     margin-right: 10px;
-    color: #f08804;
+    color: var(--accent-color);
     font-weight: 700;
 }
 
@@ -80,14 +89,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--text-color);
 }
 
 .header--basketIcon {
-    color: white;
+    color: var(--text-color);
     font-size: 30px;
 }
 
+/* Category Styles */
 .home--category {
     display: flex;
     gap: 10px;
@@ -96,39 +106,35 @@
     align-items: center;
     height: 50px;
     width: 100%;
-    background-color: #1f2937;
+    background-color: var(--primary-bg-color);
 }
 
 .category--button {
-    color: white;
-    font-size: 12px; /* Adjust as needed */
-    font-weight: 600; /* Adjust as needed */
+    color: var(--text-color);
+    font-size: 12px;
+    font-weight: 600;
     padding: 15px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
-    border-bottom: 3px solid transparent; /* Add a transparent border initially */
-a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit the color from the parent element */
+    transition: background-color 0.3s ease;
+    border-bottom: 3px solid transparent;
 }
 
-.category--button:hover {
-    background-color: #4a5568;
-    border-bottom: 3px solid #ffffff;
+.category--button a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.category--button:active {
-    background-color: #4a5568;
-    border-bottom: 3px solid #ffffff;
-}
-}
-
-.home--category span:hover {
-    background-color: #4a5568; /* Change the background color on hover */
-    border-bottom: 3px solid #ffffff; /* Add a border on hover */
-}
-
+.category--button:hover,
+.category--button:active,
+.home--category span:hover,
 .home--category span.active {
-    background-color: #4a5568; /* Apply a different background color to the active category */
-    border-bottom: 3px solid #ffffff; /* Apply a border to the active category */
+    background-color: var(--accent-color);
+    border-bottom: 3px solid #ffffff;
 }
+
+/* Optional: Update font family for all text */
+body {
+    font-family: var(--main-font);
+}
+
+
