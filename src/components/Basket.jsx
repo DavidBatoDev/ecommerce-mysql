@@ -3,6 +3,8 @@ import { useStateValue } from '../context/StateProvider'
 import BasketItem from './BasketItem'
 import '../styles/Basket.css'
 import formatCurrency from '../utils/FormatCurrency';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Link } from 'react-router-dom';
 
 function Basket() {
     const [{basket}, dispatch] = useStateValue();
@@ -18,12 +20,22 @@ function Basket() {
         return calculateItemsTotal() * 1.10
       }
 
+
+
     return (
         <div className='basket'>
             <h1>Review your order</h1>
             <div className="basket-container">
                 <div className="basket-item-container">
-                {basket.map(item => (
+                { basket.length === 0 ? 
+                <Link className='link' to='/'>
+                    <div className="basket-empty">
+                        <AddShoppingCartIcon className='basket-empty-icon'/>
+                        <h2>Your basket is empty</h2>
+                    </div>
+                </Link>
+                :
+                basket.map(item => (
                     <BasketItem
                         key={item.id}
                         id={item.id}

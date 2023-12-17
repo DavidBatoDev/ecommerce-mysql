@@ -128,3 +128,17 @@
       font-size: 9px;
     }
   }
+
+  .link {
+    text-decoration: none;
+    color: black;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .basket-empty {
+    display: flex;
+    color: gray;
+  }
