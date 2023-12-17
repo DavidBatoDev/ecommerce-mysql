@@ -52,19 +52,19 @@ function Home() {
     <div className='home'>
     <div className='home--category'>
         <Link to='/'>
-            <span className='category--button'>All</span>
+            <span className={`category--button ${!category ? 'selected' : ''}`}>All</span>
         </Link>
         <Link to='/mens-clothing'>
-            <span className='category--button'>Mens Clothing</span>
+            <span className={`category--button ${category === 'mens-clothing' ? 'selected' : ''}`}>Mens Clothing</span>
         </Link>
         <Link to='/womens-clothing'>
-            <span className='category--button'>Womens Clothing</span>
+            <span className={`category--button ${category === 'womens-clothing' ? 'selected' : ''}`}>Womens Clothing</span>
         </Link>
         <Link to='/jewelery'>
-            <span className='category--button'>Jewelery</span>
+            <span className={`category--button ${category === 'jewelery' ? 'selected' : ''}`}>Jewelery</span>
         </Link>
         <Link to='/electronics'>
-            <span className='category--button'>Electronics</span>
+            <span className={`category--button ${category === 'electronics' ? 'selected' : ''}`}>Electronics</span>
         </Link>
     </div>
     <div className='home--class'>

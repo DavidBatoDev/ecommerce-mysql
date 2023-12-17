@@ -46,34 +46,34 @@ function Basket() {
                     />
                 ))}
                 </div>
-                <div className='payment'>
-                    <div className="payment-summary">
-                        <div className="payment-summary-title">
+                <div className='basket-payment'>
+                    <div className="basket-payment-summary">
+                        <div className="basket-payment-summary-title">
                             Basket Summary
                         </div>
 
-                        <div className="payment-summary-row">
+                        <div className="basket-payment-summary-row">
                             <div>Items ({basket.length}):</div>
-                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
+                            <div className="basket-payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
                         </div>
-                        <div className="payment-summary-row">
+                        <div className="basket-payment-summary-row">
                             <div>Shipping &amp; handling:</div>
-                            <div className="payment-summary-money">Free</div>
+                            <div className="basket-payment-summary-money">Free</div>
                         </div>
 
-                        <div className="payment-summary-row subtotal-row">
+                        <div className="basket-payment-summary-row subtotal-row">
                             <div>Total before tax:</div>
-                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
+                            <div className="basket-payment-summary-money">${formatCurrency(calculateItemsTotal())}</div>
                         </div>
 
-                        <div className="payment-summary-row">
+                        <div className="basket-payment-summary-row">
                             <div>Estimated tax (10%):</div>
-                            <div className="payment-summary-money">${formatCurrency(calculateItemsTotal() * 0.10)}</div>
+                            <div className="basket-payment-summary-money">${formatCurrency(calculateItemsTotal() * 0.10)}</div>
                         </div>
 
-                        <div className="payment-summary-row total-row">
+                        <div className="basket-payment-summary-row total-row">
                             <div>Order total:</div>
-                            <div className="payment-summary-money">${formatCurrency(calculateTotal())}</div>
+                            <div className="basket-payment-summary-money">${formatCurrency(calculateTotal())}</div>
                         </div>
 
                         <button onClick={e => navigate("/payment")} className="place-order-button button-primary">

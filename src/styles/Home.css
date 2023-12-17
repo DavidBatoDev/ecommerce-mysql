@@ -93,5 +93,13 @@
 .home--category span.active {
     background-color: var(--accent-color);
     border-bottom: 3px solid #ffffff;
+    color: white;
+}
+
+.selected {
+    background-color: var(--accent-color);
+    border-bottom: 3px solid #ffffff;
+    color: white;
+    border-radius: 10px;
 }
 
