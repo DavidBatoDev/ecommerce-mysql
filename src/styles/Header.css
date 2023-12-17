@@ -123,12 +123,12 @@ a {
 }
 }
 
-.home--category > span:hover {
+.home--category span:hover {
     background-color: #4a5568; /* Change the background color on hover */
     border-bottom: 3px solid #ffffff; /* Add a border on hover */
 }
 
-.home--category > span.active {
+.home--category span.active {
     background-color: #4a5568; /* Apply a different background color to the active category */
     border-bottom: 3px solid #ffffff; /* Apply a border to the active category */
 }

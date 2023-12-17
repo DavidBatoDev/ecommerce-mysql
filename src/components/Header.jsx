@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Logo from '../assets/Logo/logo.png'
+import LogoDark from '../assets/Logo/Logo-dark.png'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import '../styles/Header.css'
@@ -33,7 +33,9 @@ function Header() {
   return (
     <div className="header">
         <div className='header--container'>
-            <img className='header--logo' src={Logo} alt="logo" />
+            <Link to="/">
+                <img className='header--logo' src={LogoDark} alt="logo" />
+            </Link>
             <div className="header--search">
                 <input className='header--searchInput' type="text" placeholder={category.category ? `Search item in ${category.category}` : "Search"} />
                 <SearchIcon className='header--searchIcon' />
@@ -64,6 +66,7 @@ function Header() {
                 </Link>
             </div>
         </div>
+        {window.location.pathname !== '/basket' &&
         <div className='home--category'>
             <Link to='/'>
                 <span className='category--button'>All</span>
@@ -81,6 +84,7 @@ function Header() {
                 <span className='category--button'>Electronics</span>
             </Link>
         </div>
+        }   
     </div>
   )
 }
