@@ -27,7 +27,7 @@
     position: relative;
     width: 100%;
     z-index: 1;
-    margin-bottom: -150px;
+    margin-bottom: -220px;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
     mask-mode: alpha;
@@ -41,8 +41,14 @@
 }
 
 .home--rest {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.home--rest > * {
+    flex-basis: calc(50% - 10px);
+    margin: 5px;
 }
 
