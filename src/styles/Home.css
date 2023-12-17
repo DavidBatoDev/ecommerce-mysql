@@ -1,4 +1,6 @@
-
+.home {
+    position: relative;
+}
 .home--class {
     position: static;
     display: flex;
@@ -23,6 +25,16 @@
     border-radius: 8px;
     overflow: hidden;
   } */
+
+  .home--class {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100vh;
+  }
 
 .home--image {
     position: relative;
