@@ -1,3 +1,1 @@
-*Unfinish App
-
-this app is a simple ecommerce store in react, some future features include Firebase Database, authentication and payment processing from (Paymongo API or Stripe Api)
+Developing an E-commerce website leveraging the Public FakeStore API, enabling users to efficiently filter products by category. Users have the capability to log in, add selected items to their shopping cart, and seamlessly store these products in the Firebase database. This ensures that products in the cart are associated and saved to the respective user's profile for a personalized shopping experience. Future features may include adding payment processing by the use of Node/express integrating it to Paypal API or Paymongo API
