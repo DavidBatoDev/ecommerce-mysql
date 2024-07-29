@@ -1,48 +1,32 @@
-import express from 'express'
-import mysql from 'mysql2'
-import dotenv from 'dotenv'
+import express from 'express';
+import dotenv from 'dotenv';
+import productsRoutes from './routes/productsRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
 
-// constants
-const app = express()
+// Constants
+const app = express();
 
-const db = mysql.createConnection({
-    host: process.env.DB_HOST || '',
-    user: process.env.DB_USER || '',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || '',
-    connectionLimit: 10
-})
+// Middlewares
+app.use(express.json());
 
-// middlewares
-db.connect(err => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        process.exit(1);
-    } else {
-        console.log('Successfully connected to the database.');
-    }
-});
+// Routesd
+app.use('/api/products', productsRoutes);
 
-app.use(express.json())
-
-
-// listen
-app.listen(5000, () => {
-    console.log('Server is running on port 5000')
-})
-
-// routes 
-app.use
-
+// Global Error Handler
 app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500
-    const message = err.message || 'Internal Server Error'
-    return res.status(statusCode).send({
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    res.status(statusCode).send({
         success: false,
         message,
-        statusCode: statusCode
-    })
-})
+        statusCode
+    });
+});
+
+// Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`localhost:${PORT}`);
+});
