@@ -20,18 +20,20 @@ function Home() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                let url = 'https://fakestoreapi.com/products';
+                let url = 'http://localhost:5000/api/products'
                 if (category) {
                     const apiCategory = categoryMap[category];
                     if (apiCategory) {
-                        url += `/category/${apiCategory}`;
+                        url += `?category=${encodeURIComponent(apiCategory)}`;
                     }
                 }
                 const response = await fetch(url);
+                // console.log('response:', response);
                 const json = await response.json();
+                console.log('json:', json);
                 setProducts(json);
             } catch (error) {
-                console.log(error);
+                console.error('Error fetching products:', error);
             }
         };
         fetchProducts();
@@ -66,6 +68,9 @@ function Home() {
         <Link to='/electronics'>
             <span className={`category--button ${category === 'electronics' ? 'selected' : ''}`}>Electronics</span>
         </Link>
+        {/* <marquee>
+            <h1 style={{fontSize: '200'}}>Free shipping fee</h1>
+        </marquee> */}
     </div>
     <div className='home--class'>
         <div className='home--container'>
@@ -73,48 +78,45 @@ function Home() {
             <div className='home--row'>
                 {renderItems(products, 0, 2, (product) => (
                     <Products
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
+                        key={product.product_id}
+                        id={product.product_id}
+                        title={product.name}
                         price={product.price}
                         image={product.image}
-                        rating={product.rating.rate}
+                        // rating={product.rating.rate}
                     />
                 ))}
             </div>
             <div className='home--row'>
                 {renderItems(products, 2, 5, (product) => (
                     <Products
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
+                        key={product.product_id}
+                        id={product.product_id}
+                        title={product.name}
                         price={product.price}
                         image={product.image}
-                        rating={product.rating.rate}
                     />
                 ))}
             </div>
             <div className='home--row'>
                 {renderItems(products, 5, 6, (product) => (
                     <Products
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
+                        key={product.product_id}
+                        id={product.product_id}
+                        title={product.name}
                         price={product.price}
                         image={product.image}
-                        rating={product.rating.rate}
                     />
                 ))}
             </div>
             <div className='home--rest'>
                 {renderItems(products, 6, products.length, (product) => (
                     <Products
-                        key={product.id}
-                        id={product.id}
-                        title={product.title}
+                        key={product.product_id}
+                        id={product.product_id}
+                        title={product.name}
                         price={product.price}
                         image={product.image}
-                        rating={product.rating.rate}
                     />
                 ))}
             </div>

@@ -8,7 +8,7 @@ import Star_5 from '../assets/ratings/rating-50.png'
 import { useStateValue } from '../context/StateProvider'
 import formatCurrency from '../utils/FormatCurrency';
 
-export default function Product({id, title, image, price, rating}) {
+export default function Product({id, title, image, price}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
     const [{basket}, dispatch] = useStateValue();
 

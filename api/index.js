@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import productsRoutes from './routes/productsRoutes.js';
+import cors from 'cors';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -10,8 +11,9 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
 
-// Routesd
+// Routes
 app.use('/api/products', productsRoutes);
 
 // Global Error Handler
