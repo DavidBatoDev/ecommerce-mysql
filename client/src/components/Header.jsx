@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import LogoDark from '../assets/Logo/Logo-dark.png'
+import LogoDark from '../assets/Logo/Logo-Dark.png'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import '../styles/Header.css'

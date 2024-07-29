@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import LogoDark from '../assets/Logo/Logo-dark.png'
-import '../styles/Signin.css'
+import LogoDark from "../assets/Logo/Logo-Dark.png"
+import '../styles/SignIn.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../Firebase'
 
