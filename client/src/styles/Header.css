@@ -5,7 +5,12 @@
     --search-bg-color: #e0e0e0;    
   }
 
-/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+}
 
 .header--container {
     height: 70px;
@@ -17,17 +22,20 @@
     z-index: 100;
     border-bottom: 2px solid var(--accent-color);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* position: fixed;
-    width: 100%; */
+    width: 100%;
 }
+
 
 .header--logo {
     cursor: pointer;
-    width: 100px;
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
     object-fit: contain;
     margin: 0 20px;
     margin-top: 18px;
 }
+
 
 .header--search {
     display: flex;
@@ -80,6 +88,30 @@
     font-weight: 800;
 }
 
+@media screen and (min-width: 901px) {
+    .header--logo {
+        height: 100px;
+        width: 100px;
+    }
+
+    .header--search {
+        max-width: 600px;
+    }
+
+    .header--searchInput {
+        width: 100%;
+    }
+
+    .header--optionsLineOne {
+        font-size: 12px;
+    }
+
+    .header--optionsLineTwo {
+        font-size: 15px;
+    }
+    
+}
+
 .header--basketCount {
     cursor: pointer;
     margin-left: 10px;
@@ -103,12 +135,7 @@
 }
 
 
-/* Optional: Update font family for all text */
 body {
     font-family: var(--main-font);
 }
-
-
-
-
 

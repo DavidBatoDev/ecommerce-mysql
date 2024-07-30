@@ -6,8 +6,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: auto;
-    margin-right: auto;
     height: 100vh;
 }
 
@@ -16,48 +14,39 @@
     background-color: #ded3d3;
 }
 
-/* .enchance-coming-soon {
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-  } */
-
-  .home--class {
-    position: static;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100vh;
-  }
 
 .home--image {
     position: relative;
     width: 100%;
+    margin-top: -30px;
     z-index: 1;
-    margin-bottom: -220px;
+    margin-bottom: -90px;
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
     mask-mode: alpha;
 }
 
+@media only screen and (min-width: 901px) {
+    .home--container {
+        padding: 30px;
+    }
+    
+    .home--image {
+        margin-bottom: -250px;
+    }
+}
+
 .home--row {
     display: flex;
     z-index: 1;
-    margin-left: 5px;
-    margin-right: 5px;
+    gap: 20px;
+    margin: 10px;
 }
 
 .home--rest {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 5px;
 }
 
 .home--rest > * {
@@ -67,14 +56,13 @@
 
 .home--category {
     display: flex;
+    height: 70px;
+    padding: 0px 40px;
     gap: 10px;
-    padding: 0 20px;
     flex-direction: row;
     align-items: center;
     height: 50px;
-    width: 100%;
     background-color: var(--primary-bg-color);
-    
 }
 
 .home--category > a {
@@ -86,11 +74,11 @@
     color: var(--text-color);
     font-size: 12px;
     font-weight: 600;
-    padding: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-bottom: 3px solid transparent;
     text-decoration: none;
+    padding: 10px;
 }
 
 .category--button a {

@@ -57,7 +57,7 @@ export default function Product({id, title, image, price}) {
 
 
   return (
-    <div className='product'>
+    <div className='product-card'>
         <div className="product--info">
             <p className='product--title'>{title}</p>
             <p className="product--price">
@@ -82,8 +82,9 @@ export default function Product({id, title, image, price}) {
             <p className='q'>{quantity}</p>
             <button onClick={handleIncrement} className="increment">+</button>
         </div> */}
-
-        <button onClick={addToBasket} className='product--button'>Add to Basket</button>
+        <div className='product--button-container'>
+            <button onClick={addToBasket} className='product--button'>Add to Basket</button>
+        </div>
     </div>
   )
 }
