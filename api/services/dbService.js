@@ -19,6 +19,7 @@ db.connect(err => {
     console.log('Successfully connected to the database.');
 });
 
+// This function will be used to execute all the queries to the database.
 export const query = (sql, params) => {
     return new Promise((resolve, reject) => {
         db.query(sql, params, (err, results) => {

@@ -70,18 +70,14 @@ export default function Product({id, title, image, price}) {
             {/* <img src={stars[Math.floor(rating) - 1]} alt="" /> */}
         </div>
 
-        <img 
-            className='product--image'
-            src={image}
-            alt=""
-        />
+        <div className='product-image-container'>
+            <img 
+                className='product--image'
+                src={image}
+                alt=""
+            />
+        </div>
         
-            
-        {/* <div className="quantity-selector">
-            <button onClick={handleDecrement} className="decrement">-</button>
-            <p className='q'>{quantity}</p>
-            <button onClick={handleIncrement} className="increment">+</button>
-        </div> */}
         <div className='product--button-container'>
             <button onClick={addToBasket} className='product--button'>Add to Basket</button>
         </div>

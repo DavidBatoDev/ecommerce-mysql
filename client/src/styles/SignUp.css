@@ -25,6 +25,12 @@
     border-radius: 5px;
 }
 
+@media screen and (max-width: 768px) {
+    .signun--container {
+        width: 90%;
+    }   
+}
+
 .signup--container > h1 {
     font-weight: 500;
     margin-bottom: 20px;

@@ -1,36 +1,42 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react';
 import Products from './Products';
-import DecemberBanner from '../assets/images/DecemberBanner.png'
-import '../styles/Home.css'
-import { useParams } from 'react-router-dom';
+import DecemberBanner from '../assets/images/DecemberBanner.png';
+import '../styles/Home.css';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Popup from './Popup'; 
 
 function Home() {
-    const [products, setProducts] = useState([])
-
+    const [products, setProducts] = useState([]);
     const { category } = useParams();
+    const [categories, setCategories] = useState([]);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const navigate = useNavigate();
 
-    const categoryMap = {
-        'mens-clothing': 'men\'s clothing',
-        'womens-clothing': 'women\'s clothing',
-        'jewelery': 'jewelery',
-        'electronics': 'electronics',
-    };
+    useEffect(() => {
+        const fetchAllCatergories = async () => {
+            try {
+                const response = await fetch('api/products/categories');
+                const json = await response.json();
+                setCategories(json);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+        fetchAllCatergories();
+    }, []);
 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                let url = 'http://localhost:5000/api/products'
+                let url = 'api/products';
                 if (category) {
-                    const apiCategory = categoryMap[category];
-                    if (apiCategory) {
-                        url += `?category=${encodeURIComponent(apiCategory)}`;
-                    }
+                    url += `?category=${category}`;
                 }
                 const response = await fetch(url);
-                // console.log('response:', response);
                 const json = await response.json();
-                console.log('json:', json);
                 setProducts(json);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -38,6 +44,13 @@ function Home() {
         };
         fetchProducts();
     }, [category]);
+
+    // Handle window resize event
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     function renderItems(array, start, end, callback) {
         const items = [];
@@ -49,81 +62,101 @@ function Home() {
         return items;
     }
 
+    // for responsive design, getting the number of products to display in each row
+    const getProductCount = () => {
+        if (windowWidth < 600) return [2, 4, 6, products.length];
+        if (windowWidth < 900) return [2, 4, 6, products.length];
+        return [2, 5, 6, products.length];
+    };
 
-  return (
-    <div className='home'>
-    <div className='home--category'>
-        <Link to='/'>
-            <span className={`category--button ${!category ? 'selected' : ''}`}>All</span>
-        </Link>
-        <Link to='/mens-clothing'>
-            <span className={`category--button ${category === 'mens-clothing' ? 'selected' : ''}`}>Mens Clothing</span>
-        </Link>
-        <Link to='/womens-clothing'>
-            <span className={`category--button ${category === 'womens-clothing' ? 'selected' : ''}`}>Womens Clothing</span>
-        </Link>
-        <Link to='/jewelery'>
-            <span className={`category--button ${category === 'jewelery' ? 'selected' : ''}`}>Jewelery</span>
-        </Link>
-        <Link to='/electronics'>
-            <span className={`category--button ${category === 'electronics' ? 'selected' : ''}`}>Electronics</span>
-        </Link>
-        {/* <marquee>
-            <h1 style={{fontSize: '200'}}>Free shipping fee</h1>
-        </marquee> */}
-    </div>
-    <div className='home--class'>
-        <div className='home--container'>
-            <img className='home--image' src={DecemberBanner} alt="banner" />
-            <div className='home--row'>
-                {renderItems(products, 0, 2, (product) => (
-                    <Products
-                        key={product.product_id}
-                        id={product.product_id}
-                        title={product.name}
-                        price={product.price}
-                        image={product.image}
-                        // rating={product.rating.rate}
-                    />
-                ))}
+    const [firstCount, secondCount, thirdCount, maxCount] = getProductCount();
+
+
+    return (
+        <div className='home'>
+            <div className='home--category'>
+                <div>
+                    <Link to={`/`}>
+                        <span className={`category--button ${category === '' ? 'selected' : ''}`}>All</span>
+                    </Link>
+                    {categories.slice(0, 3).map((categoryItem) => (
+                        <Link to={`/${categoryItem}`} key={categoryItem}>
+                            <span className={`category--button ${category === categoryItem ? 'selected' : ''}`}>{categoryItem}</span>
+                        </Link>
+                    ))}
+                </div>
+                {categories.length > 3 && (
+                    <>
+                        <MoreHorizIcon 
+                            className="more-icon" 
+                            onClick={() => setIsPopupOpen(true)} 
+                        />
+                        {isPopupOpen && (
+                            <Popup 
+                                categories={categories.slice(3)} 
+                                selectedCategory={category}
+                                onClose={() => setIsPopupOpen(false)}
+                                onCategoryClick={(categoryItem) => {
+                                    setIsPopupOpen(false);
+                                    // handle navigation to selected category
+                                    navigate(`/${categoryItem}`); // Use navigate for navigation
+                                }}
+                            />
+                        )}
+                    </>
+                )}
             </div>
-            <div className='home--row'>
-                {renderItems(products, 2, 5, (product) => (
-                    <Products
-                        key={product.product_id}
-                        id={product.product_id}
-                        title={product.name}
-                        price={product.price}
-                        image={product.image}
-                    />
-                ))}
-            </div>
-            <div className='home--row'>
-                {renderItems(products, 5, 6, (product) => (
-                    <Products
-                        key={product.product_id}
-                        id={product.product_id}
-                        title={product.name}
-                        price={product.price}
-                        image={product.image}
-                    />
-                ))}
-            </div>
-            <div className='home--rest'>
-                {renderItems(products, 6, products.length, (product) => (
-                    <Products
-                        key={product.product_id}
-                        id={product.product_id}
-                        title={product.name}
-                        price={product.price}
-                        image={product.image}
-                    />
-                ))}
+            <div className='home--class'>
+                <div className='home--container'>
+                    <img className='home--image' src={DecemberBanner} alt="banner" />
+                    <div className='home--row'>
+                        {renderItems(products, 0, firstCount, (product) => (
+                            <Products
+                                key={product.product_id}
+                                id={product.product_id}
+                                title={product.name}
+                                price={product.price}
+                                image={product.image}
+                            />
+                        ))}
+                    </div>
+                    <div className='home--row'>
+                        {renderItems(products, firstCount, secondCount, (product) => (
+                            <Products
+                                key={product.product_id}
+                                id={product.product_id}
+                                title={product.name}
+                                price={product.price}
+                                image={product.image}
+                            />
+                        ))}
+                    </div>
+                    <div className='home--row'>
+                        {renderItems(products, secondCount, thirdCount, (product) => (
+                            <Products
+                                key={product.product_id}
+                                id={product.product_id}
+                                title={product.name}
+                                price={product.price}
+                                image={product.image}
+                            />
+                        ))}
+                    </div>
+                    <div className='home--rest'>
+                        {renderItems(products, thirdCount, maxCount, (product) => (
+                            <Products
+                                key={product.product_id}
+                                id={product.product_id}
+                                title={product.name}
+                                price={product.price}
+                                image={product.image}
+                            />
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-  </div>
-  )
+    );
 }
 
-export default Home
+export default Home;
