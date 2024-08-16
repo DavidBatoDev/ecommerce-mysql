@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Popup.css';
+import { Link } from 'react-router-dom';
 
 function Popup({ categories, selectedCategory, onClose, onCategoryClick }) {
     return (
@@ -7,14 +8,14 @@ function Popup({ categories, selectedCategory, onClose, onCategoryClick }) {
             <button className="popup-close" onClick={onClose}>×</button>
             <div className="popup-content">
                 {categories.map((categoryItem) => (
-                    <a 
-                        href={`/${categoryItem}`} 
+                    <Link
+                        to={`/${categoryItem}`} 
                         key={categoryItem}
                         className={`popup-item ${selectedCategory === categoryItem ? 'selected-popup-item' : ''}`}
                         onClick={() => onCategoryClick(categoryItem)}
                     >
                         {categoryItem}
-                    </a>
+                    </Link>
                 ))}
             </div>
         </div>

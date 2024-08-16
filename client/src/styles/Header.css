@@ -26,6 +26,9 @@
     width: 100%;
     padding: 0 20px; /* Added padding for better spacing */
     box-sizing: border-box; /* Ensures padding does not affect width */
+    width: 100vw;
+    padding: 0px 20px;
+    justify-content: space-around;
 }
 
 .header--logo {
@@ -37,8 +40,8 @@
 }
 
 .header--search {
-    display: flex;
     flex: 1;
+    display: flex;
     align-items: center;
     border-radius: 24px;
     background-color: var(--search-bg-color);
