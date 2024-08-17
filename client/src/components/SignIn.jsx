@@ -5,6 +5,7 @@ import '../styles/SignIn.css'
 import axios from 'axios'
 import { useStateValue } from '../context/StateProvider'
 import Error from './ErrorModal'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 function Signin() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ function Signin() {
     const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [authToken, setAuthToken] = useLocalStorage('authToken', null)
 
 
     const signIn = async (e) => {
@@ -28,6 +30,7 @@ function Signin() {
             type: 'SET_USER',
             user: res.data.user
         })
+        setAuthToken(res.data.token)
         navigate('/')
     } catch (error) {
         const errorMessage = error.response.data.message;

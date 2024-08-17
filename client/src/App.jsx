@@ -11,11 +11,28 @@ import {
 } from 'react-router-dom'
 import { useStateValue } from "./context/StateProvider"
 import Payment from "./components/Payment"
+import useLocalStorage from "./hooks/useLocalStorage"
 
 function App() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue()
+  const [localUser, setLocalUser] = useLocalStorage('user', null)
 
-  console.log(user)
+  // on first load, check if there is a user in local storage
+  useEffect(() => {
+    if (localUser.email) {
+      dispatch({
+        type: 'SET_USER',
+        user: localUser
+      })
+    }
+  }, [])
+
+  // whenever user changes, update localUser
+  useEffect(() => {
+    if (user) {
+      setLocalUser(user)
+    }
+  }, [user])
 
   return (
     <>

@@ -40,6 +40,8 @@ export const createUser = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, saltRounds);
         const results = await query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, hashedPassword]);
 
+        console.log(results)
+
         return res.status(201).json({ message: 'User created successfully', userId: results.insertId });
     } catch (err) {
         console.log('Error creating user:', err); // Log error for debugging
@@ -65,7 +67,9 @@ export const loginUser = async (req, res, next) => {
 
         const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        return res.status(200).json({ user: { id: user.id, email: user.email }, token });
+        console.log(user.user_id)
+
+        return res.status(200).json({ user: { id: user.user_id, email: user.email }, token });
     } catch (err) {
         console.log('Error logging in user:', err); // Log error for debugging
         next(err);
