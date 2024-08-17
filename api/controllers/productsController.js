@@ -1,5 +1,6 @@
 import { query } from '../services/dbService.js';
 
+// for getting all products
 export const getProducts = async (req, res, next) => {
     try {
         const { category } = req.query;
@@ -18,6 +19,7 @@ export const getProducts = async (req, res, next) => {
     }
 };
 
+// for getting all categories of products
 export const getAllCategories = async (req, res, next) => {
     try {
         const results = await query('SELECT DISTINCT category FROM products');

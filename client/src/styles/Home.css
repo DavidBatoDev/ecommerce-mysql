@@ -43,6 +43,10 @@
     margin: 10px;
 }
 
+.home--container {
+    max-width: 1300px;
+}
+
 .home--rest {
     display: flex;
     flex-wrap: wrap;

@@ -31,6 +31,8 @@ function App() {
   useEffect(() => {
     if (user) {
       setLocalUser(user)
+    } else {
+      setLocalUser(null)
     }
   }, [user])
 

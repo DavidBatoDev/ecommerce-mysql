@@ -31,6 +31,8 @@ function Signin() {
             user: res.data.user
         })
         setAuthToken(res.data.token)
+
+        console.log(res.data.cart)
         navigate('/')
     } catch (error) {
         const errorMessage = error.response.data.message;

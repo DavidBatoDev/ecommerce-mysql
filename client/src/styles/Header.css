@@ -45,7 +45,7 @@
     align-items: center;
     border-radius: 24px;
     background-color: var(--search-bg-color);
-    padding: 10px;
+    padding: 5px;
 }
 
 .header--searchInput {
@@ -57,6 +57,7 @@
     color: var(--text-color);
     font-size: 14px;
     font-family: var(--main-font);
+    outline: none;
 }
 
 .header--searchIcon {

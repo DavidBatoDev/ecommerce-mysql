@@ -5,13 +5,19 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import '../styles/Header.css';
 import { Link, useParams } from 'react-router-dom';
 import { useStateValue } from '../context/StateProvider';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function Header() {
-    const [{ basket, user }] = useStateValue();
+    const [{ basket, user }, dispatch] = useStateValue();
     const { category } = useParams(); // Destructure category directly
+    const [localAuth, setLocalAuth] = useLocalStorage('authToken', null);
 
     const handleAuthentication = () => {
-        
+        dispatch({
+            type: 'SET_USER',
+            user: null
+        });
+        setLocalAuth(null);
     };
 
     const itemsQuantity = basket.reduce((total, item) => total + item.quantity, 0);
