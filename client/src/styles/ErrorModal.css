@@ -1,0 +1,30 @@
+.screen-container {
+    display: flex;
+    background-color: transparent;
+    position: absolute;
+    left: 35%;
+    right: auto;
+    top: 10%;
+    transform: translate(-10%);
+    z-index: 10000;
+}
+
+.error-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+    gap: 20px;
+}
+
+.error-info > span {
+    font-size: 0.7rem;
+    cursor: pointer;
+}

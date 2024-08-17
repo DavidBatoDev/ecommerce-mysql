@@ -1,31 +1,40 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LogoDark from "../assets/Logo/Logo-Dark.png"
 import '../styles/SignUp.css'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../Firebase'
+import Error from './ErrorModal'
+import axios from 'axios'
 
 function SignUp() {
+    const navigate = useNavigate()
+    const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
 
-    const signUp = e => {
+    const signUp = async (e) => {
         e.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user)
-                navigate('/')
+        try {
+            const res = await axios.post('api/users/register', {
+                username,
+                email,
+                password
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode, errorMessage)
-            });
+            if (res.status !== 201) {
+                setError(res.data.message)
+            }
+            alert('User created successfully')
+            navigate('/sign-in')
+        }catch (error) {
+            const errorMessage = error.message;
+            setError(errorMessage)
+        }
     }
+
 
     return (
     <div>
+        {error && <Error errorMsg={error} clearError={()=>setError('')} />}
         <div className='signup'>
             <Link to='/'>
                 <img className='signup-logo' src={LogoDark} alt="" />
@@ -34,15 +43,20 @@ function SignUp() {
                 <h1>Sign Up</h1>
                 <form action="">
                     <label htmlFor="">
+                        <h5>Username</h5>
+                        <input placeholder='Username' value={username} onChange={e => setUsername(e.target.value)} type="text" />
+                    </label>
+
+                    <label htmlFor="">
                         <h5>Email</h5>
-                        <input value={email} onChange={e => setEmail(e.target.value)} type="text" />
+                        <input placeholder='Email' value={email} onChange={e => setEmail(e.target.value)} type="text" />
                     </label>
 
                     <label htmlFor="">
                         <h5>Password</h5>
-                        <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
+                        <input placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} type="password" />
                     </label>
-                    <button onClick={signUp} className='signup--signUpButton'>Sign Up</button>
+                    <button onClick={signUp} className='signup--signupButton'>Sign Up</button>
                 </form>
                 <span className='signIn-notice'>Already have an account?</span>
                 <Link to='/sign-in'>

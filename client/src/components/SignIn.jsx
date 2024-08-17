@@ -2,30 +2,34 @@ import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import LogoDark from "../assets/Logo/Logo-Dark.png"
 import '../styles/SignIn.css'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../Firebase'
+import axios from 'axios'
 
 function Signin() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const signIn = e => {
-        e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                navigate('/')
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode, errorMessage)
-            });
+
+    const signIn = async (e) => {
+    e.preventDefault();
+    try {
+        const res = await axios.post('api/users/login', {
+            email,
+            password
+        })
+        if (res.status !== 201) {
+            setError(res.data.message)
+        }
+        alert('User created successfully')
+        navigate('/sign-in')
+    } catch (error) {
+        const errorMessage = error.message;
+        setError(errorMessage)
     }
+}
 
     return (
-        <div className='signin'>
+        <div className='signin's>
             <Link to='/'>
                 <img className='signin-logo' src={LogoDark} alt="" />
             </Link>
@@ -34,12 +38,12 @@ function Signin() {
                 <form action="">
                     <label htmlFor="">
                         <h5>Email</h5>
-                        <input value={email} onChange={e => setEmail(e.target.value)} type="text" />
+                        <input placeholder='Email' value={email} onChange={e => setEmail(e.target.value)} type="text" />
                     </label>
 
                     <label htmlFor="">
                         <h5>Password</h5>
-                        <input value={password} onChange={e => setPassword(e.target.value)} type="password" />
+                        <input placeholder='Password' value={password} onChange={e => setPassword(e.target.value)} type="password" />
                     </label>
                     <button onClick={signIn} className='signin--signInButton'>Sign In</button>
                 </form>

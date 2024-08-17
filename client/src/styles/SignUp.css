@@ -5,6 +5,7 @@
     height: 100vh;
     background-color: #ded3d3;
 
+
 }
 
 .signup-logo {
@@ -26,9 +27,11 @@
 }
 
 @media screen and (max-width: 768px) {
-    .signun--container {
+    .signup--container {
         width: 90%;
-    }   
+    
+    }
+    
 }
 
 .signup--container > h1 {
@@ -51,46 +54,44 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.signup--container > form > label > input:hover {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
 
 .signup--container > p {
     margin-top: 15px;
     font-size: 12px;
 }
 
-.signup--signUpButton {
+.signup--signupButton {
     color: rgb(200, 150, 48);
     background-color: #131921;
     border-radius: 20px;
     width: 100%;
     height: 40px;
     border: 1px solid;
-    margin-top: 20px;
+    margin-top: 10px;
     border-color: #a88734 #cb9714 #a27c1c;
     cursor: pointer;
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
+.signup--signupButton:hover {
+    box-shadow: 0 0 10px rgba(200, 150, 48, 0.8);
+    transform: scale(1.05);
+}
+
+
+.signup--registerButton:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+}
+
 .signIn-notice {
-    margin-top: 15px;
-    font-weight: 600;
-    color: #333; /* Adjust color as needed */
+    margin-top: 20px;
+    font-size: 12px;
 }
 
 .signIn-navigate {
-    color: #007bff;
-    text-decoration: none;
+    color: #131921;
+    font-weight: 500;
     cursor: pointer;
-    transition: color 0.3s ease;
-
+    text-decoration: underline;
 }
-
-.signIn-navigate:hover {
-    color: #0056b3;
-}
-
-
-

@@ -27,8 +27,6 @@ export const getAllCategories = async (req, res, next) => {
         }
 
         const categoriesList = results.map((result) => result.category);
-
-        console.log('categoriesList:', categoriesList);
         
         return res.status(200).json(categoriesList);
     } catch (err) {
