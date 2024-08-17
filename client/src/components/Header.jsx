@@ -4,8 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import '../styles/Header.css';
 import { Link, useParams } from 'react-router-dom';
-import { auth } from '../Firebase';
-import { signOut } from 'firebase/auth';
 import { useStateValue } from '../context/StateProvider';
 
 function Header() {
@@ -13,15 +11,7 @@ function Header() {
     const { category } = useParams(); // Destructure category directly
 
     const handleAuthentication = () => {
-        if (auth.currentUser) {
-            signOut(auth)
-                .then(() => {
-                    console.log("Signed out");
-                })
-                .catch((error) => {
-                    console.error("Error signing out", error);
-                });
-        }
+        
     };
 
     const itemsQuantity = basket.reduce((total, item) => total + item.quantity, 0);

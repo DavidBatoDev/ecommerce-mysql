@@ -23,10 +23,9 @@ function SignUp() {
             if (res.status !== 201) {
                 setError(res.data.message)
             }
-            alert('User created successfully')
             navigate('/sign-in')
         }catch (error) {
-            const errorMessage = error.message;
+            const errorMessage = error.response.data.message;
             setError(errorMessage)
         }
     }

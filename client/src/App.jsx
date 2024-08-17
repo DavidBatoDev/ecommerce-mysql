@@ -9,29 +9,13 @@ import {
   Routes,
   Route,
 } from 'react-router-dom'
-import { auth } from "./Firebase"
-import { onAuthStateChanged } from "firebase/auth"
 import { useStateValue } from "./context/StateProvider"
 import Payment from "./components/Payment"
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch ({
-          type: 'SET_USER',
-          user: user
-        })
-      } else {
-        dispatch({
-          type: 'SET_USER',
-          user: null
-        })
-      }
-    });
-  }, [user])
+  console.log(user)
 
   return (
     <>

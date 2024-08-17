@@ -3,9 +3,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import LogoDark from "../assets/Logo/Logo-Dark.png"
 import '../styles/SignIn.css'
 import axios from 'axios'
+import { useStateValue } from '../context/StateProvider'
+import Error from './ErrorModal'
 
 function Signin() {
     const navigate = useNavigate();
+    const [{user}, dispatch] = useStateValue();
+    const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -20,16 +24,20 @@ function Signin() {
         if (res.status !== 201) {
             setError(res.data.message)
         }
-        alert('User created successfully')
-        navigate('/sign-in')
+        dispatch({
+            type: 'SET_USER',
+            user: res.data.user
+        })
+        navigate('/')
     } catch (error) {
-        const errorMessage = error.message;
+        const errorMessage = error.response.data.message;
         setError(errorMessage)
     }
 }
 
     return (
         <div className='signin's>
+            {error && <Error errorMsg={error} clearError={()=>setError('')} />}
             <Link to='/'>
                 <img className='signin-logo' src={LogoDark} alt="" />
             </Link>
