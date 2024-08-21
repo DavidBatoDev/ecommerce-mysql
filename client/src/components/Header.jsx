@@ -11,13 +11,20 @@ function Header() {
     const [{ basket, user }, dispatch] = useStateValue();
     const { category } = useParams(); // Destructure category directly
     const [localAuth, setLocalAuth] = useLocalStorage('authToken', null);
+    const [localBasket, setLocalBasket] = useLocalStorage('basket', []);
+    const [localUser, setLocalUser] = useLocalStorage('user', null);
 
     const handleAuthentication = () => {
         dispatch({
             type: 'SET_USER',
             user: null
         });
+        dispatch({
+            type: 'EMPTY_CART'
+        });
+        setLocalUser(null);
         setLocalAuth(null);
+        setLocalBasket([]);
     };
 
     const itemsQuantity = basket.reduce((total, item) => total + item.quantity, 0);

@@ -83,24 +83,25 @@ export const loginUser = async (req, res, next) => {
         // Create a JWT token
         const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
+
+
         // Get all the cart items and its quantity from cart items many to many table from the user id and cart id also get the product details from products table
         const cartItems = await query(
             `SELECT 
-                cart_items.cart_id AS cart_id, 
-                cart_items.product_id AS product_id, 
+                cart_items.product_id AS id, 
                 cart_items.quantity AS quantity, 
-                products.name AS product_name, 
-                products.image AS product_image,
-                products.description AS product_description,
-                products.price AS product_price
+                products.name AS name, 
+                products.image AS image,
+                products.description AS description,
+                products.price AS price
             FROM cart_items 
             JOIN products ON cart_items.product_id = products.id 
-            WHERE cart_items.cart_id = (SELECT cart_id FROM carts WHERE user_id = ?)`
+            WHERE cart_items.cart_id = (SELECT id FROM carts WHERE user_id = ?)`
             , [user.id]
         )
 
         return res.status(200).json({
-             user: { id: user.user_id, email: user.email }, 
+             user: { id: user.id, email: user.email }, 
              cart: cartItems, 
              token 
         });
@@ -109,3 +110,42 @@ export const loginUser = async (req, res, next) => {
         next(err);
     }
 };
+
+// unused
+export const addManyItemsToCart = async (req, res, next) => {
+    try {
+        const { products, userId } = req.body;
+
+        // Check if the required information is provided
+        if (!products || !userId) {
+            return res.status(400).json({ message: 'Missing required information' });
+        }
+
+        // Add the products to the cart
+        for (let i = 0; i < products.length; i++) {
+            // Check if the product already exists in the cart
+            const existingProduct = await query(
+                `SELECT 
+                    * 
+                FROM cart_items 
+                WHERE product_id = ? AND cart_id = (SELECT cart_id FROM carts WHERE user_id = ?)`, [products[i].id, userId]);
+
+            // If the product exists, update the quantity
+            if (existingProduct.length > 0) {
+                await query(`
+                    UPDATE 
+                        cart_items SET quantity = quantity + ? 
+                    WHERE product_id = ? AND cart_id = (SELECT cart_id FROM carts WHERE user_id = ?)`, [products[i].quantity, products[i].id, userId]);
+            }
+            // If the product does not exist, add the product to the cart 
+            else {
+                await query(`INSERT INTO cart_items (cart_id, product_id, quantity) VALUES ((SELECT cart_id FROM carts WHERE user_id = ?), ?, ?)`, [userId, products[i].id, products[i].quantity]);
+            }
+        }
+
+        return res.status(201).json({ message: 'Products added to cart successfully' });
+    } catch (err) {
+        console.log('Error adding products to cart:', err); // Log error for debugging
+        next(err);
+    }
+}

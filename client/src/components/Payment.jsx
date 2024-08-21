@@ -34,7 +34,7 @@ function Payment() {
                     <img src={item.image} alt='product' />
                 </div>
                 <div className='item--info'>
-                    <p className='item--title'>{item.title}</p>
+                    <p className='item--title'>{item.name}</p>
                     <p className='item--price'>
                       <small>$</small>
                       <strong>{item.price}</strong>

@@ -14,27 +14,44 @@ import Payment from "./components/Payment"
 import useLocalStorage from "./hooks/useLocalStorage"
 
 function App() {
-  const [{ user }, dispatch] = useStateValue()
+  const [{ user, basket }, dispatch] = useStateValue()
   const [localUser, setLocalUser] = useLocalStorage('user', null)
+  const [localBasket, setLocalBasket] = useLocalStorage('basket', [])
 
-  // on first load, check if there is a user in local storage
+  // on initial render, check if there is a user or basket in local storage
   useEffect(() => {
-    if (localUser.email) {
+    console.log('localUser:', localUser)
+    console.log('localBasket:', localBasket)
+    if (localUser?.email) {
       dispatch({
         type: 'SET_USER',
         user: localUser
       })
     }
+    if (localBasket.length > 0) {
+      localBasket.forEach(item => {
+        dispatch({
+          type: 'ADD_TO_CART',
+          item
+        })
+      })
+    }
   }, [])
 
-  // whenever user changes, update localUser
+  // whenever user or basket changes, update localUser or localBasket
   useEffect(() => {
     if (user) {
       setLocalUser(user)
+
     } else {
       setLocalUser(null)
     }
-  }, [user])
+    if (basket.length > 0) {
+      setLocalBasket(basket)
+    } else {
+      setLocalBasket([])
+    }
+  }, [user, basket])
 
   return (
     <>

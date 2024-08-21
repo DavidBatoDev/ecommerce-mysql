@@ -38,7 +38,7 @@ function Basket() {
                     <BasketItem
                         key={item.id}
                         id={item.id}
-                        title={item.title}
+                        name={item.name}
                         image={item.image}
                         price={item.price}
                         quantity={item.quantity}

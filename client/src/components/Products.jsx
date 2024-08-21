@@ -7,11 +7,12 @@ import Star_4 from '../assets/ratings/rating-40.png'
 import Star_5 from '../assets/ratings/rating-50.png'
 import { useStateValue } from '../context/StateProvider'
 import formatCurrency from '../utils/FormatCurrency';
+import axios from 'axios';
 
-export default function Product({id, title, image, price}) {
+export default function Product({id, name, image, price, description}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
-    const [{basket}, dispatch] = useStateValue();
-
+    const [{user, basket}, dispatch] = useStateValue();
+    const [error, setError] = useState(null);
 
     // quantity state & functions
     const [quantity, setQuantity] = useState(1);
@@ -26,40 +27,56 @@ export default function Product({id, title, image, price}) {
         }
     };
 
-    const addToBasket = () => {
-        const productId = id;
-
-        const existingProduct = basket.findIndex(product => product.id === productId);
-
-        if (existingProduct !== -1) {
-            const newQuamtity = basket[existingProduct].quantity += 1;
-            dispatch({
-                type: 'SET_QUANTITY',
-                payload: {
-                    id,
-                    quantity: newQuamtity
+    const addToCart = async () => {
+        try {
+            if (user?.email) {
+                console.log('adding to cart with user')
+                const token = localStorage.getItem('ecom_authToken');
+                console.log('token:', token)
+                if (!token) {
+                    console.log('no token')
+                    return setError('You need to be logged in to add items to cart')
                 }
-            })
-        } else {
+                const res = await axios.post('api/cart/add', {
+                    productId: id,
+                    quantity
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                console.log('res:', res)
+                if (res.status !== 201) {
+                    console.log('error:', res.data.message)
+                    setError(res.data.message)
+                    return
+                }
+            }
+            // Add to local cart regardless of authentication
             dispatch({
-                type: 'ADD_TO_BASKET',
+                type: 'ADD_TO_CART',
                 item: {
                     id,
-                    title,
+                    name,
                     image,
+                    description,
                     price,
-                    quantity: 1,
+                    quantity,
                     isSelected: true
                 }
             })
+        } catch (error) {
+            console.log('Error adding to cart:', error.response.data.message)
+            setError(error.response.data.message);
         }
     }
 
 
   return (
     <div className='product-card'>
+        {/* <Error error={error} /> */}
         <div className="product--info">
-            <p className='product--title'>{title}</p>
+            <p className='product--title'>{name}</p>
             <p className="product--price">
             <small>$</small>
             <strong>{formatCurrency(price)}</strong>
@@ -79,7 +96,7 @@ export default function Product({id, title, image, price}) {
         </div>
         
         <div className='product--button-container'>
-            <button onClick={addToBasket} className='product--button'>Add to Basket</button>
+            <button onClick={addToCart} className='product--button'>Add to Basket</button>
         </div>
     </div>
   )

@@ -2,15 +2,39 @@ import React, {useState} from 'react'
 import { useStateValue } from '../context/StateProvider'
 import '../styles/BasketItem.css'
 import formatCurrency from '../utils/FormatCurrency';
+import axios from 'axios';
 
-function BasketItem({id, title, image, price, quantity, isSelected}) {
-  const [{basket}, dispatch] = useStateValue();
+function BasketItem({id, name, image, price, quantity, isSelected}) {
+  const [{user, basket}, dispatch] = useStateValue();
 
-  const removeFromBasket = () => {
-    dispatch({
-      type: 'REMOVE_FROM_BASKET',
-      id: id
-    })
+
+  const removeFromBasket = async () => {
+    try {
+      if (user?.email) {
+        const token = localStorage.getItem('ecom_authToken');
+        if (!token) {
+          return setError('You need to be logged in to add items to cart')
+        }
+        const res = await axios.post('api/cart/remove', {
+          productId: id
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        if (res.status !== 200) {
+          console.log('error:', res.data.message)
+          return
+        }
+      }
+      // Remove from local cart regardless of authentication
+      dispatch({
+        type: 'REMOVE_FROM_BASKET',
+        id: id
+      })
+    } catch (error) {
+      console.log('error:', error)
+    }
   }
 
   const toggleItemSelection = () => {
@@ -31,7 +55,7 @@ function BasketItem({id, title, image, price, quantity, isSelected}) {
 
               <div className="basket-item-details">
                 <div className="product-name">
-                    {title}
+                    {name}
                 </div>
                 <div className="product-price">
                   ${formatCurrency(price)}

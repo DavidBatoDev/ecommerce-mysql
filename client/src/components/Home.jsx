@@ -112,44 +112,48 @@ function Home() {
                     <div className='home--row'>
                         {renderItems(products, 0, firstCount, (product) => (
                             <Products
-                                key={product.product_id}
-                                id={product.product_id}
-                                title={product.name}
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
                                 price={product.price}
                                 image={product.image}
+                                description={product.description}
                             />
                         ))}
                     </div>
                     <div className='home--row'>
                         {renderItems(products, firstCount, secondCount, (product) => (
                             <Products
-                                key={product.product_id}
-                                id={product.product_id}
-                                title={product.name}
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
                                 price={product.price}
                                 image={product.image}
+                                description={product.description}
                             />
                         ))}
                     </div>
                     <div className='home--row'>
                         {renderItems(products, secondCount, thirdCount, (product) => (
                             <Products
-                                key={product.product_id}
-                                id={product.product_id}
-                                title={product.name}
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
                                 price={product.price}
                                 image={product.image}
+                                description={product.description}
                             />
                         ))}
                     </div>
                     <div className='home--rest'>
                         {renderItems(products, thirdCount, maxCount, (product) => (
                             <Products
-                                key={product.product_id}
-                                id={product.product_id}
-                                title={product.name}
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
                                 price={product.price}
                                 image={product.image}
+                                description={product.description}
                             />
                         ))}
                     </div>

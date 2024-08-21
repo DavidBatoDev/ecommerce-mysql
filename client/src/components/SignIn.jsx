@@ -9,7 +9,7 @@ import useLocalStorage from '../hooks/useLocalStorage'
 
 function Signin() {
     const navigate = useNavigate();
-    const [{user}, dispatch] = useStateValue();
+    const [{user, basket}, dispatch] = useStateValue();
     const [error, setError] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -26,16 +26,38 @@ function Signin() {
         if (res.status !== 201) {
             setError(res.data.message)
         }
+
+        // add existing items from the basket to db
+        basket.forEach(async item => {
+            console.log('item:', item)
+            const resForAddingItemsToCart = await axios.post('api/cart/add', {
+                productId: item.id,
+                quantity: item.quantity
+            }, {
+                headers: {
+                    Authorization: `Bearer ${res.data.token}`
+                }
+            })
+            if (resForAddingItemsToCart.status === 201) {
+                console.log('item added to cart')
+            }
+        })
+        // add existing items from the db to cart
+        res.data.cart.forEach(item => {
+            dispatch({
+                type: 'ADD_TO_CART',
+                item
+            })
+        })
         dispatch({
             type: 'SET_USER',
             user: res.data.user
         })
         setAuthToken(res.data.token)
-
-        console.log(res.data.cart)
         navigate('/')
     } catch (error) {
         const errorMessage = error.response.data.message;
+        console.log('error:', errorMessage)
         setError(errorMessage)
     }
 }
