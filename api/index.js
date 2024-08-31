@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import productsRoutes from './routes/productsRoutes.js';
 import usersRoutes from './routes/userRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
+import ordersRoutes from './routes/ordersRoutes.js';
 import cors from 'cors';
 
 // Load environment variables from .env file
@@ -19,6 +20,7 @@ app.use(cors());
 app.use('/api/products', productsRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/cart', cartRoutes);
+app.use('/api/orders', ordersRoutes);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

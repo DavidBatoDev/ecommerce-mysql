@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import axios from 'axios'; // Import axios for making HTTP requests
 import '../styles/Payment.css';
 
 function Payment() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const [products, setProducts] = useState([]);
   const [address, setAddress] = useState({
     email: user?.email || '',
@@ -16,11 +17,12 @@ function Payment() {
   const [paypalDetails, setPaypalDetails] = useState({
     paypalEmail: '',
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const selectedProducts = basket.filter((item) => item.isSelected);
     setProducts(selectedProducts);
-  }, [])
+  }, [basket]);
 
   const handleAddressChange = (e) => {
     setAddress({
@@ -38,6 +40,53 @@ function Payment() {
       ...paypalDetails,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handlePlaceOrder = async () => {
+    if (!address.street || !address.city || !address.state) {
+      alert('Please enter a valid address');
+      return;
+    }
+    try {
+      // Prepare the order data
+      const orderData = {
+        address,
+        paymentMethod,
+        paypalDetails: paymentMethod === 'paypal' ? paypalDetails : null,
+        products,
+      };
+
+      // Get the user's auth token from localStorage
+      const token = JSON.parse(localStorage.getItem('ecom_authToken'));
+
+      if (!token) {
+        alert('You must be logged in to place an order.');
+        return;
+      }
+
+      // Make the API call to place the order
+      const response = await axios.post('/api/orders/place', orderData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log('Order placed:', response);
+
+      // Handle success
+      if (response.status === 201) {
+        alert('Order placed successfully!');
+        // Clear the basket after placing the order
+        dispatch({
+          type: 'REMOVE_SELECTED_FROM_BASKET',
+        });
+        // Redirect to a confirmation or orders page
+        navigate('/orders');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error);
+      alert('There was an issue placing your order. Please try again.');
+    }
   };
 
   return (
@@ -150,7 +199,9 @@ function Payment() {
         </div>
 
         <div className='payment--actions'>
-          <button className='payment--button'>Place Order</button>
+          <button className='payment--button' onClick={handlePlaceOrder}>
+            Place Order
+          </button>
         </div>
       </div>
     </div>

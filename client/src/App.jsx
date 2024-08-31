@@ -21,8 +21,6 @@ function App() {
 
   // on initial render, check if there is a user or basket in local storage
   useEffect(() => {
-    console.log('localUser:', localUser)
-    console.log('localBasket:', localBasket)
     if (localUser?.email) {
       dispatch({
         type: 'SET_USER',

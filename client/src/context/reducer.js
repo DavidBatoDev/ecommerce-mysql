@@ -55,6 +55,12 @@ export const reducer = (state, action) => {
                 basket: state.basket.filter(item => item.id !== action.id),
             }
         }
+        case 'REMOVE_SELECTED_FROM_BASKET': {
+            return {
+                ...state,
+                basket: state.basket.filter(item => !item.isSelected),
+            }
+        }
         default:{
             return state;
         }
