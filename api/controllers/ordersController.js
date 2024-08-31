@@ -55,7 +55,7 @@ export const placeOrder = async (req, res, next) => {
     }
 };
 
-// Get order details by ID
+// Get order details by ID with product information
 export const getOrderDetails = async (req, res, next) => {
     const orderId = req.params.orderId;
 
@@ -67,10 +67,41 @@ export const getOrderDetails = async (req, res, next) => {
             return res.status(404).json({ message: 'Order not found' });
         }
 
-        // Fetch order items
-        const orderItems = await query(`SELECT * FROM order_items WHERE order_id = ?`, [orderId]);
+        // Fetch order items along with product details
+        const orderItems = await query(`
+            SELECT 
+                oi.*, 
+                p.name AS product_name, 
+                p.image AS product_image, 
+                p.description AS product_description 
+            FROM 
+                order_items oi 
+            INNER JOIN 
+                products p 
+            ON 
+                oi.product_id = p.id 
+            WHERE 
+                oi.order_id = ?`, [orderId]
+        );
 
-        return res.status(200).json({ order: order[0], orderItems });
+        // Map the order items to include product details
+        const items = orderItems.map(item => ({
+            id: item.id,
+            product_id: item.product_id,
+            name: item.product_name,
+            image: item.product_image,
+            description: item.product_description,
+            quantity: item.quantity,
+            price: item.price
+        }));
+
+        // Return order details with associated items
+        return res.status(200).json({
+            order: {
+                ...order[0],
+                items,
+            },
+        });
     } catch (err) {
         console.error('Error fetching order details:', err);
         next(err);

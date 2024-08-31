@@ -1,3 +1,4 @@
+/* General Styles for Profile Page */
 .profile {
     max-width: 1200px;
     margin: auto;
@@ -87,6 +88,16 @@
     box-sizing: border-box; /* Ensure padding doesn't affect overall width */
 }
 
+/* Remove text-decoration (underline) from the order links */
+.order-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit;
+}
+
+.order-link:hover {
+    color: var(--accent-color); /* Optional: Change color on hover */
+}
+
 .order--card p {
     margin: 5px 0;
     font-size: 1rem;
@@ -171,4 +182,3 @@
         padding: 15px;
     }
 }
-

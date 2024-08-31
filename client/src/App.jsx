@@ -7,7 +7,8 @@ import SignUp from './components/SignUp';
 import Basket from './components/Basket';
 import Payment from './components/Payment';
 import ProductView from './components/ProductView';
-import Profile from './components/Profile'; // Import Profile component
+import Profile from './components/Profile'; 
+import OrderDetails from './components/OrderDetails';
 import { useStateValue } from './context/StateProvider';
 import useLocalStorage from './hooks/useLocalStorage';
 
@@ -71,7 +72,8 @@ function App() {
                     <Route path="/basket" element={<><Header /><Basket /></>} />
                     <Route path="/payment" element={<><Header /><Payment /></>} />
                     <Route path="/product/:id" element={<><Header /><ProductView /></>} />
-                    <Route path="/profile" element={<><Header /><Profile /></>} /> {/* Profile Route */}
+                    <Route path="/profile" element={<><Header /><Profile /></>} />
+                    <Route path="/order-details/:id" element={<><Header /><OrderDetails /></>} />
                 </Routes>
             </Router>
         </>

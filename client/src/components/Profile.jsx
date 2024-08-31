@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Profile.css';
 
 function Profile() {
@@ -18,7 +19,6 @@ function Profile() {
                             Authorization: `Bearer ${token}`,
                         },
                     });
-                    console.log('orders:', response.data);
                     setOrders(response.data);
                 } catch (error) {
                     console.error('Error fetching orders:', error);
@@ -38,8 +38,6 @@ function Profile() {
         window.location.href = '/sign-in';
     };
 
-    console.log('orders:', orders);
-
     return (
         <div className="profile">
             <div className="profile--header">
@@ -57,24 +55,26 @@ function Profile() {
                 ) : (
                     <div className="orders--list">
                         {orders.map(order => (
-                            <div key={order.id} className="order--card">
-                                <p><strong>Order ID:</strong> {order.id}</p>
-                                <p><strong>Date:</strong> {new Date(order.order_date).toLocaleString()}</p>
-                                <p><strong>Total:</strong> ${order.total_amount}</p>
-                                <div className="order--items">
-                                    {order.items && order.items.length > 0 ? (
-                                        order.items.map(item => (
-                                            <div key={item.id} className="order--item">
-                                                <p>{item.name}</p>
-                                                <p>Qty: {item.quantity}</p>
-                                                <p>Price: ${item.price}</p>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <p>No items in this order.</p>
-                                    )}
+                            <Link to={`/order-details/${order.id}`} key={order.id} className="order-link">
+                                <div className="order--card">
+                                    <p><strong>Order ID:</strong> {order.id}</p>
+                                    <p><strong>Date:</strong> {new Date(order.order_date).toLocaleString()}</p>
+                                    <p><strong>Total:</strong> ${order.total_amount}</p>
+                                    <div className="order--items">
+                                        {order.items && order.items.length > 0 ? (
+                                            order.items.map(item => (
+                                                <div key={item.id} className="order--item">
+                                                    <p>{item.name}</p>
+                                                    <p>Qty: {item.quantity}</p>
+                                                    <p>Price: ${item.price}</p>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No items in this order.</p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 )}
