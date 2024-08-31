@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
-import '../styles/Payment.css'
+import '../styles/Payment.css';
 
 function Payment() {
-    const [{basket, user}, dispatch] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+  const [address, setAddress] = useState({
+    email: user?.email || '',
+    street: '',
+    city: '',
+    state: '',
+  });
+  const [paymentMethod, setPaymentMethod] = useState('cod');
+
+  const handleAddressChange = (e) => {
+    setAddress({
+      ...address,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handlePaymentMethodChange = (e) => {
+    setPaymentMethod(e.target.value);
+  };
 
   return (
     <div className='payment'>
@@ -12,14 +30,40 @@ function Payment() {
         <h1>
           Checkout (<Link to='/basket'>{basket?.length} items</Link>)
         </h1>
+        
         <div className='payment--section'>
           <div className='payment--title'>
             <h3>Delivery Address</h3>
           </div>
           <div className='payment--address'>
-            <p>{user?.email}</p>
-            <p>123, React Lane</p>
-            <p>Los Angeles, CA</p>
+            <input
+              type='email'
+              name='email'
+              placeholder='Email'
+              value={address.email}
+              onChange={handleAddressChange}
+            />
+            <input
+              type='text'
+              name='street'
+              placeholder='Street Address'
+              value={address.street}
+              onChange={handleAddressChange}
+            />
+            <input
+              type='text'
+              name='city'
+              placeholder='City'
+              value={address.city}
+              onChange={handleAddressChange}
+            />
+            <input
+              type='text'
+              name='state'
+              placeholder='State'
+              value={address.state}
+              onChange={handleAddressChange}
+            />
           </div>
         </div>
 
@@ -28,35 +72,60 @@ function Payment() {
             <h3>Review items and delivery</h3>
           </div>
           <div className='payment--items'>
-            {basket.map(item => (
-                <div className='item'>
+            {basket.map((item) => (
+              <div className='item' key={item.id}>
                 <div className='item--image'>
-                    <img src={item.image} alt='product' />
+                  <img src={item.image} alt='product' />
                 </div>
                 <div className='item--info'>
-                    <p className='item--title'>{item.name}</p>
-                    <p className='item--price'>
-                      <small>$</small>
-                      <strong>{item.price}</strong>
-                      <span>({item.quantity})</span>
-                    </p>
+                  <p className='item--title'>{item.name}</p>
+                  <p className='item--price'>
+                    <small>$</small>
+                    <strong>{item.price}</strong>
+                    <span>({item.quantity})</span>
+                  </p>
                 </div>
-            </div>
+              </div>
             ))}
           </div>
         </div>
+
         <div className='payment--section'>
           <div className='payment--title'>
             <h3>Payment Method</h3>
           </div>
           <div className='payment--details'>
-            <p>Details</p>
-            {/* Stripe magic will go here */}
+            <div className='payment--method'>
+              <input
+                type='radio'
+                id='cod'
+                name='paymentMethod'
+                value='cod'
+                checked={paymentMethod === 'cod'}
+                onChange={handlePaymentMethodChange}
+              />
+              <label htmlFor='cod'>Cash on Delivery (COD)</label>
+            </div>
+            <div className='payment--method'>
+              <input
+                type='radio'
+                id='paypal'
+                name='paymentMethod'
+                value='paypal'
+                checked={paymentMethod === 'paypal'}
+                onChange={handlePaymentMethodChange}
+              />
+              <label htmlFor='paypal'>PayPal</label>
+            </div>
           </div>
+        </div>
+        
+        <div className='payment--actions'>
+          <button className='payment--button'>Place Order</button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Payment
+export default Payment;
