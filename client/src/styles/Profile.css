@@ -1,0 +1,174 @@
+.profile {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--primary-bg-color);
+    box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+}
+
+.profile--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.profile--header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    flex: 1; /* Allow title to take full width if needed */
+    margin-bottom: 10px; /* Add some margin to improve spacing on small screens */
+}
+
+.signout-button {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0; /* Prevent button from shrinking too much */
+}
+
+.signout-button:hover {
+    background-color: darkorange;
+}
+
+.profile--info {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+}
+
+.profile--info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.profile--info p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.profile--orders {
+    margin-top: 30px;
+}
+
+.profile--orders h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    color: var(--text-color);
+}
+
+.orders--list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order--card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--accent-color);
+    box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+}
+
+.order--card p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.order--items {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order--item {
+    background-color: var(--search-bg-color);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    box-sizing: border-box; /* Ensure padding doesn't affect overall width */
+}
+
+.order--item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    flex-basis: 100%; /* Ensure each item takes full width on smaller screens */
+    text-align: left;
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 900px) {
+    .profile {
+        padding: 10px;
+    }
+
+    .profile--header h1 {
+        font-size: 1.5rem;
+    }
+
+    .signout-button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+        margin-top: 10px;
+    }
+
+    .profile--info h2 {
+        font-size: 1.3rem;
+    }
+
+    .profile--orders h2 {
+        font-size: 1.5rem;
+    }
+
+    .order--card p {
+        font-size: 0.9rem;
+    }
+
+    .order--item p {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile--header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .signout-button {
+        width: 100%; /* Make the button take full width */
+        text-align: center;
+    }
+
+    .order--item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order--card {
+        padding: 15px;
+    }
+}
+

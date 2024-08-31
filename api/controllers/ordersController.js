@@ -76,3 +76,50 @@ export const getOrderDetails = async (req, res, next) => {
         next(err);
     }
 };
+
+// for getting all the orders, also get the order items and product details
+export const getAllOrders = async (req, res, next) => {
+    try {
+        // Fetch all orders for the logged-in user
+        const orders = await query(`SELECT * FROM orders WHERE user_id = ?`, [req.user.id]);
+
+        if (orders.length === 0) {
+            return res.status(404).json({ message: 'No orders found' });
+        }
+
+        // Fetch order items and product details for each order
+        for (const order of orders) {
+            const orderItems = await query(`
+                SELECT 
+                    oi.*, 
+                    p.name AS product_name, 
+                    p.image AS product_image, 
+                    p.description AS product_description 
+                FROM 
+                    order_items oi 
+                INNER JOIN 
+                    products p 
+                ON 
+                    oi.product_id = p.id 
+                WHERE 
+                    oi.order_id = ?`, [order.id]
+            );
+
+            // Add product details to each order item
+            order.items = orderItems.map(item => ({
+                id: item.id,
+                product_id: item.product_id,
+                name: item.product_name,
+                image: item.product_image,
+                description: item.product_description,
+                quantity: item.quantity,
+                price: item.price
+            }));
+        }
+
+        return res.status(200).json(orders);
+    } catch (err) {
+        console.error('Error fetching orders:', err);
+        next(err);
+    }
+};
