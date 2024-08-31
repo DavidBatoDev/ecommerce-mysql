@@ -7,12 +7,14 @@ import Star_4 from '../assets/ratings/rating-40.png'
 import Star_5 from '../assets/ratings/rating-50.png'
 import { useStateValue } from '../context/StateProvider'
 import formatCurrency from '../utils/FormatCurrency';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Product({id, name, image, price, description}) {
     const stars = [Star_1, Star_2, Star_3, Star_4, Star_5];
     const [{user, basket}, dispatch] = useStateValue();
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     // quantity state & functions
     const [quantity, setQuantity] = useState(1);
@@ -71,13 +73,17 @@ export default function Product({id, name, image, price, description}) {
         }
     }
 
+    const handleGoToProduct = () => {
+        navigate(`/product/${id}`);
+    }
+
 
   return (
     <div className='product-card'>
         {/* <Error error={error} /> */}
         <div className="product--info">
-            <p className='product--title'>{name}</p>
-            <p className="product--price">
+            <p onClick={handleGoToProduct} className='product--title'>{name}</p>
+            <p onClick={handleGoToProduct} className="product--price">
             <small>$</small>
             <strong>{formatCurrency(price)}</strong>
             </p>
@@ -87,7 +93,7 @@ export default function Product({id, name, image, price, description}) {
             {/* <img src={stars[Math.floor(rating) - 1]} alt="" /> */}
         </div>
 
-        <div className='product-image-container'>
+        <div onClick={handleGoToProduct} className='product-image-container'>
             <img 
                 className='product--image'
                 src={image}

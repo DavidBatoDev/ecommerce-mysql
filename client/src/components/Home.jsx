@@ -71,6 +71,7 @@ function Home() {
 
     const [firstCount, secondCount, thirdCount, maxCount] = getProductCount();
 
+    console.log('categories:', categories);
 
     return (
         <div className='home'>

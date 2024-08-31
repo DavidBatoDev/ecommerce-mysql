@@ -1,5 +1,6 @@
 import express from 'express';
-import { 
+import {
+    getProduct,
     getProducts,
     getAllCategories
 } from '../controllers/productsController.js';
@@ -7,6 +8,8 @@ import {
 const router = express.Router();
 
 router.get('/', getProducts);
+
+router.get('/product/:id', getProduct);
 
 router.get('/categories', getAllCategories);
 

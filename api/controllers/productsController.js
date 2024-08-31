@@ -35,3 +35,19 @@ export const getAllCategories = async (req, res, next) => {
         next(err);
     }
 }
+
+// for getting a single product
+export const getProduct = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const results = await query('SELECT * FROM products WHERE id = ?', [id]);
+
+        if (results.length == 0) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        return res.status(200).json(results[0]);
+    } catch (err) {
+        next(err);
+    }
+}

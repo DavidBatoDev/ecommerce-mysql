@@ -4,6 +4,7 @@ import Home from "./components/Home"
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
 import Basket from "./components/Basket"
+import ProductView from "./components/ProductView"
 import {
   BrowserRouter as Router,
   Routes,
@@ -63,6 +64,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/basket" element={<><Header /><Basket /></>} />
         <Route path="/payment" element={<><Header/><Payment /></>} />
+        <Route path="/product/:id" element={<><Header /><ProductView /></>} /> {/* Updated */}
       </Routes>
     </Router>
     </>
