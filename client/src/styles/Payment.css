@@ -44,7 +44,8 @@
     flex: 0.8;
 }
 
-.payment--address input {
+.payment--address input,
+.paypal--details input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -53,7 +54,8 @@
     font-size: 1rem;
 }
 
-.payment--address input:focus {
+.payment--address input:focus,
+.paypal--details input:focus {
     border-color: var(--input-focus-color);
     outline: none;
 }
@@ -114,6 +116,10 @@
     font-size: 1rem;
     color: var(--text-color);
     cursor: pointer;
+}
+
+.paypal--details {
+    margin-top: 10px;
 }
 
 .payment--actions {

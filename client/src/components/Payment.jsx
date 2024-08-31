@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom';
 import '../styles/Payment.css';
 
 function Payment() {
   const [{ basket, user }] = useStateValue();
+  const [products, setProducts] = useState([]);
   const [address, setAddress] = useState({
     email: user?.email || '',
     street: '',
@@ -12,6 +13,14 @@ function Payment() {
     state: '',
   });
   const [paymentMethod, setPaymentMethod] = useState('cod');
+  const [paypalDetails, setPaypalDetails] = useState({
+    paypalEmail: '',
+  });
+
+  useEffect(() => {
+    const selectedProducts = basket.filter((item) => item.isSelected);
+    setProducts(selectedProducts);
+  }, [])
 
   const handleAddressChange = (e) => {
     setAddress({
@@ -24,13 +33,20 @@ function Payment() {
     setPaymentMethod(e.target.value);
   };
 
+  const handlePaypalDetailsChange = (e) => {
+    setPaypalDetails({
+      ...paypalDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div className='payment'>
       <div className='payment--container'>
         <h1>
           Checkout (<Link to='/basket'>{basket?.length} items</Link>)
         </h1>
-        
+
         <div className='payment--section'>
           <div className='payment--title'>
             <h3>Delivery Address</h3>
@@ -72,7 +88,7 @@ function Payment() {
             <h3>Review items and delivery</h3>
           </div>
           <div className='payment--items'>
-            {basket.map((item) => (
+            {products.map((item) => (
               <div className='item' key={item.id}>
                 <div className='item--image'>
                   <img src={item.image} alt='product' />
@@ -117,9 +133,22 @@ function Payment() {
               />
               <label htmlFor='paypal'>PayPal</label>
             </div>
+
+            {paymentMethod === 'paypal' && (
+              <div className='paypal--details'>
+                <input
+                  type='email'
+                  name='paypalEmail'
+                  placeholder='PayPal Email'
+                  value={paypalDetails.paypalEmail}
+                  onChange={handlePaypalDetailsChange}
+                  required
+                />
+              </div>
+            )}
           </div>
         </div>
-        
+
         <div className='payment--actions'>
           <button className='payment--button'>Place Order</button>
         </div>
